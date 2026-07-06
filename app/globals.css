@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ============================================
+   CORECAST DESIGN TOKENS
+   Centralized design system — never hardcode.
+   ============================================ */
+
+:root {
+  /* Brand gradient — constant across themes (from the CORECAST logo) */
+  --brand-peach: #f79e83;
+  --brand-salmon: #f38d90;
+  --brand-pink: #d863a5;
+  --brand-magenta: #e663a5;
+  --brand-purple: #815da7;
+  --brand-deep: #65489b;
+  --brand-violet: #5f4196;
+  --gradient-brand: linear-gradient(
+    92deg,
+    var(--brand-peach) 0%,
+    var(--brand-magenta) 38%,
+    var(--brand-purple) 72%,
+    var(--brand-violet) 100%
+  );
+
+  /* Light theme */
+  --bg: #f6f4f9;
+  --bg-elevated: #ffffff;
+  --bg-inverse: #1d1c29;
+  --fg: #1d1c29;
+  --fg-muted: #55516a;
+  --fg-subtle: #8b86a0;
+  --fg-inverse: #f6f4f9;
+  --accent: #b8408f;
+  --accent-strong: #65489b;
+  --line: rgba(29, 28, 41, 0.12);
+  --line-strong: rgba(29, 28, 41, 0.28);
+  --card: rgba(29, 28, 41, 0.04);
+  --scrim: rgba(246, 244, 249, 0.72);
+  --glow: rgba(216, 99, 165, 0.16);
+  --selection-bg: #1d1c29;
+  --selection-fg: #f6f4f9;
+}
+
+[data-theme="dark"] {
+  --bg: #1d1c29;
+  --bg-elevated: #262433;
+  --bg-inverse: #f2eff6;
+  --fg: #f2eff6;
+  --fg-muted: #a49fb6;
+  --fg-subtle: #6d6883;
+  --fg-inverse: #1d1c29;
+  --accent: #d863a5;
+  --accent-strong: #f38d90;
+  --line: rgba(242, 239, 246, 0.1);
+  --line-strong: rgba(242, 239, 246, 0.25);
+  --card: rgba(242, 239, 246, 0.04);
+  --scrim: rgba(29, 28, 41, 0.68);
+  --glow: rgba(216, 99, 165, 0.12);
+  --selection-bg: #d863a5;
+  --selection-fg: #1d1c29;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-inverse: var(--bg-inverse);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-fg-inverse: var(--fg-inverse);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-card: var(--card);
+  --color-scrim: var(--scrim);
+
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0.05, 0, 1);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg-subtle) transparent;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition: background-color 0.7s var(--ease-cinematic), color 0.7s var(--ease-cinematic);
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* Custom cursor active state — hide native cursor on fine pointers */
+@media (pointer: fine) {
+  body[data-custom-cursor="true"],
+  body[data-custom-cursor="true"] a,
+  body[data-custom-cursor="true"] button {
+    cursor: none;
+  }
+}
+
+/* ============================================
+   EDITORIAL TYPE SCALE
+   ============================================ */
+
+.type-hero {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 12.5vw, 12.5rem);
+  line-height: 0.88;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.type-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.type-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.type-statement {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3.2vw, 2.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.type-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.type-serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ============================================
+   CINEMATIC SURFACES
+   ============================================ */
+
+/* Film grain — applied once, fixed, above everything */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 3%); }
+  50% { transform: translate(3%, -2%); }
+  75% { transform: translate(-3%, -3%); }
+  100% { transform: translate(2%, 2%); }
+}
+
+/* Letterbox vignette for scene sections.
+   NB: no `position` here — it would override Tailwind's positioning
+   utilities (same specificity, later in cascade). Every .vignette
+   element must therefore also carry a positioning class. */
+.vignette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 60%, rgba(0, 0, 0, 0.38) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.28), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.36));
+}
+
+/* Slow drifting light sweep used in scene backdrops */
+@keyframes light-sweep {
+  0%, 100% { transform: translateX(-18%) rotate(8deg); opacity: 0.5; }
+  50% { transform: translateX(18%) rotate(8deg); opacity: 1; }
+}
+
+@keyframes slow-drift {
+  0%, 100% { transform: translate3d(-2%, -1%, 0) scale(1.04); }
+  50% { transform: translate3d(2%, 1.5%, 0) scale(1.09); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(-1.5%); }
+  50% { transform: translateY(1.5%); }
+}
+
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-x var(--marquee-duration, 36s) linear infinite;
+}
+
+.animate-light-sweep {
+  animation: light-sweep 11s var(--ease-cinematic) infinite;
+}
+
+.animate-slow-drift {
+  animation: slow-drift 22s ease-in-out infinite;
+}
+
+/* Reveal masks */
+.mask-lines .line-inner {
+  display: block;
+  will-change: transform;
+}
+
+.mask-lines .line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+/* Brand gradient helpers — registered as utilities so the Tailwind v4
+   compiler emits them (plain classes in the bg- and text- namespaces
+   get shadowed by the utility engine) */
+@utility bg-gradient-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility text-gradient-brand {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline link underline */
+.link-line {
+  position: relative;
+}
+
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s var(--ease-out-expo);
+}
+
+.link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after,
+  .animate-marquee,
+  .animate-light-sweep,
+  .animate-slow-drift {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "mcp__af555c60-5c68-41ba-b3f9-3cae191d07a3__models_explore",
+      "mcp__af555c60-5c68-41ba-b3f9-3cae191d07a3__balance",
+      "mcp__af555c60-5c68-41ba-b3f9-3cae191d07a3__generate_video",
+      "PowerShell(npm install --no-audit --no-fund)",
+      "PowerShell(npm run build)"
+    ]
+  }
+}
