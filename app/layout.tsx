@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { siteConfig } from "@/lib/data";
 import "./globals.css";
+import { almarai, mozillaText } from "./fonts";
 
 const anton = Anton({
   weight: "400",
@@ -101,7 +102,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${anton.variable} ${instrument.variable} ${manrope.variable}`}
+      className={` ${almarai.variable} ${mozillaText.variable}`}
       suppressHydrationWarning
     >
       <head>
