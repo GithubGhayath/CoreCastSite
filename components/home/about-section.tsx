@@ -12,7 +12,7 @@ export function AboutSection() {
       <SectionHeading
         index="01"
         eyebrow="About CORECAST"
-        lines={["Not an agency.", "A film crew", "for your brand."]}
+        lines={["A Digital Marketing.","&", "Media Agency"]}
       />
 
       <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-12">
@@ -20,7 +20,7 @@ export function AboutSection() {
           <WordReveal
             className="type-statement"
             accentWords={["cinema", "remembered", "story"]}
-            text="Most marketing is designed to be skipped. We direct brands the way cinema directs emotion — with strategy as the script, design as the set, and every campaign as a scene people don't want to leave. The businesses we work with stop being seen and start being remembered, because we never ship anything without a story worth telling."
+            text="CoreCast is a company under Omar Al Tayeb Holding Group, established as a specialized platform for advertising, digital marketing, and media solutions.We create innovative marketing strategies that combine creativity with modern technologies to help brands strengthen their presence, connect with their audiences, and deliver impactful messages through effective digital experiences."
           />
           <FadeUp delay={0.2} className="mt-12">
             <Magnetic strength={0.25}>

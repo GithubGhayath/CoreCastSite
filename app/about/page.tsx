@@ -39,8 +39,8 @@ export default function AboutPage() {
           <div className="md:col-span-9">
             <WordReveal
               className="type-statement"
-              accentWords={["emotion", "remembered", "craft"]}
-              text="Attention is the most expensive real estate on earth, and nobody rents it for long. So we don't chase impressions — we build emotion. Every identity, every frame, every campaign we release is engineered with the same discipline a director brings to a final cut: nothing accidental, nothing decorative, everything in service of being remembered. That is our only metric of craft."
+              accentWords={["Nothing", "impressions", "forget"]}
+              text="Attention is the world's most valuable currency—and earning it is only the beginning. We don't chase clicks or impressions; we create experiences that people remember. Every identity we build, every frame we compose, and every campaign we launch is crafted with intention, precision, and purpose. Nothing is random. Nothing is unnecessary. Every detail exists to leave a lasting impression and turn brands into stories people never forget."
             />
           </div>
         </div>

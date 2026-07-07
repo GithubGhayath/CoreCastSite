@@ -6,6 +6,7 @@ import { navLinks, siteConfig } from "@/lib/data";
 import { Magnetic } from "@/components/ui/magnetic";
 import { FadeUp } from "@/components/ui/reveal";
 import { LogoWordmark } from "@/components/ui/logo";
+import ContactInfo from "@/components/providers/ContactInfo";
 
 export function Footer() {
   return (
@@ -21,11 +22,7 @@ export function Footer() {
               >
                 {siteConfig.email}
               </a>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-fg-muted">
-                {siteConfig.address}
-                <br />
-                {siteConfig.phone}
-              </p>
+            <ContactInfo />
             </div>
 
             <nav aria-label="Footer">
