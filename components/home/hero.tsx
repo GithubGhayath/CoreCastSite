@@ -11,7 +11,7 @@ const MonolithScene = dynamic(() => import("@/components/three/monolith"), {
 });
 
 const EASE = [0.65, 0.05, 0, 1] as const;
-const HEADLINE = ["WE BUILD", "BRANDS", "THAT PEOPLE", "REMEMBER."];
+const HEADLINE = ["From the core of every story,", "we shape identity,", "define vision,", "and create lasting"];
 
 export function Hero() {
   const { ready } = useExperience();
@@ -37,7 +37,7 @@ export function Hero() {
       ref={sectionRef}
       data-theme="dark"
       className="relative h-[165vh] text-fg"
-      aria-label="CORECAST — we build brands that people remember"
+      aria-label="CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact."
     >
       <div className="vignette sticky top-0 h-screen overflow-hidden bg-bg">
         {/* architectural void behind the monolith */}
@@ -69,7 +69,7 @@ export function Hero() {
           <div className="flex-1" />
 
           <div>
-            <h1 className="type-hero" aria-label="We build brands that people remember.">
+            <h1 className="type-hero" aria-label="From the core of every story, we shape identity, define vision, and create lasting impact.">
               {HEADLINE.map((line, i) => (
                 <span key={line} className="block overflow-hidden">
                   <motion.span
@@ -85,7 +85,7 @@ export function Hero() {
                       {i === 3 ? (
                         <>
                           <span className="type-serif-accent text-gradient-brand">
-                            Remember
+                            impact
                           </span>
                           .
                         </>
