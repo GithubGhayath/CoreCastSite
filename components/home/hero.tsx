@@ -9,7 +9,7 @@ import { CtaButton } from "@/components/ui/button";
 const MonolithScene = dynamic(() => import("@/components/three/monolith"), {
   ssr: false,
 });
-
+// From the core of every story, we shape identity, define vision, and create lasting impact.
 const EASE = [0.65, 0.05, 0, 1] as const;
 const HEADLINE = ["From the core of every story,", "we shape identity,", "define vision,", "and create lasting"];
 

@@ -3,6 +3,7 @@ import { siteConfig } from "@/lib/data";
 import { PageHero } from "@/components/layout/page-hero";
 import { ContactForm } from "@/components/forms/contact-form";
 import { FadeUp } from "@/components/ui/reveal";
+import ContactInfo from "@/components/providers/ContactInfo";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -38,10 +39,12 @@ export default function ContactPage() {
             </FadeUp>
             <FadeUp delay={0.1} className="mt-10">
               <p className="type-eyebrow text-fg-subtle">Studio</p>
-              <p className="mt-3 text-base leading-relaxed text-fg-muted">
+              <ContactInfo/>
+              {/* <p className="mt-3 text-base leading-relaxed text-fg-muted">
                 {siteConfig.address}
               </p>
-              <p className="mt-2 text-base text-fg-muted">{siteConfig.phone}</p>
+              <p className="mt-2 text-base text-fg-muted">{siteConfig.phone1}</p>
+              <p className="mt-2 text-base text-fg-muted">{siteConfig.phone2}</p> */}
             </FadeUp>
             <FadeUp delay={0.2} className="mt-10">
               <p className="type-eyebrow text-fg-subtle">Follow</p>
