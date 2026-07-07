@@ -21,7 +21,9 @@ export function Header() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      setPastHero(window.scrollY > window.innerHeight * 0.85);
+      // Sync with the hero monolith's dock animation (hero.tsx dock ranges):
+      // the navbar slides in just as the shrinking monolith reaches this corner.
+      setPastHero(window.scrollY > window.innerHeight * 0.58);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -43,6 +45,9 @@ export function Header() {
   // While the header floats transparently over the dark hero,
   // borrow the dark theme's ink.
   const overDarkScene = pathname === "/" && !scrolled && !open;
+  // The logo "lands" into the bar as the hero monolith docks. On every
+  // other route it is simply present from the start.
+  const logoLanded = pathname !== "/" || pastHero || open;
 
   return (
     <>
@@ -60,7 +65,18 @@ export function Header() {
         <div className="flex items-center justify-between px-6 py-5 md:px-12">
           <Magnetic strength={0.25}>
             <Link href="/" aria-label="CORECAST home" className="block">
-              <Logo />
+              <motion.span
+                className="block origin-left will-change-transform"
+                initial={false}
+                animate={
+                  logoLanded
+                    ? { scale: 1, opacity: 1 }
+                    : { scale: 1.35, opacity: 0 }
+                }
+                transition={{ duration: 0.6, ease: EASE }}
+              >
+                <Logo />
+              </motion.span>
             </Link>
           </Magnetic>
 

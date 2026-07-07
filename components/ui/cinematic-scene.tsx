@@ -13,10 +13,14 @@ export function CinematicScene({
   scene,
   className,
   dim = 0.35,
+  still = false,
 }: {
   scene: SceneId;
   className?: string;
   dim?: number;
+  /** Force the still frame (skip video autoplay) — e.g. project posters
+   *  that play their clip only on hover. */
+  still?: boolean;
 }) {
   const def = scenes[scene];
   const [base, mid, glow] = def.palette;
@@ -28,14 +32,22 @@ export function CinematicScene({
       style={{ backgroundColor: base }}
       aria-hidden
     >
-      {def.video ? (
+      {def.video && !still ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src={def.video}
+          poster={def.image ?? undefined}
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
+        />
+      ) : def.image ? (
+        /* MVP placeholder still, dark-graded to sit under the type */
+        <div
+          className="animate-slow-drift absolute inset-[-4%] bg-cover bg-center"
+          style={{ backgroundImage: `url("${def.image}")` }}
         />
       ) : (
         <>

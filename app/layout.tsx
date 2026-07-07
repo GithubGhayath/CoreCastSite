@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Experience } from "@/components/providers/experience";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { siteConfig } from "@/lib/data";
 import "./globals.css";
 import { almarai, mozillaText } from "./fonts";
@@ -84,7 +85,7 @@ const jsonLd = {
   name: siteConfig.name,
   url: siteConfig.url,
   email: siteConfig.email,
-  telephone: siteConfig.phone,
+  telephone: siteConfig.phone1,
   description: siteConfig.description,
   address: {
     "@type": "PostalAddress",
@@ -115,6 +116,7 @@ export default function RootLayout({
       <body className="grain">
         <ThemeProvider>
           <Experience>
+            <ScrollProgress />
             <Header />
             <main>{children}</main>
             <Footer />

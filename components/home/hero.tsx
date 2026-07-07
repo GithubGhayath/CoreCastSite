@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useExperience } from "@/components/providers/experience";
 import { CtaButton } from "@/components/ui/button";
 
@@ -15,12 +15,24 @@ const HEADLINE = ["From the core of every story,", "we shape identity,", "define
 
 export function Hero() {
   const { ready } = useExperience();
+  const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
+
+  // As the hero ends, the monolith "docks" into the navbar logo slot:
+  // it shrinks and flies toward the top-left corner, then fades — handing
+  // off to the real header logo that slides in at the same moment.
+  // (Tune these ranges to match the header's `pastHero` threshold.)
+  const dockScale = useTransform(scrollYProgress, [0.55, 0.9], [1, 0.12]);
+  const dockX = useTransform(scrollYProgress, [0.55, 0.9], ["0%", "-42%"]);
+  const dockY = useTransform(scrollYProgress, [0.55, 0.9], ["0%", "-42%"]);
+  const dockOpacity = useTransform(scrollYProgress, [0.72, 0.92], [1, 0]);
+  // Reduced motion: no flight, just a gentle fade.
+  const fadeOnly = useTransform(scrollYProgress, [0.6, 0.9], [1, 0]);
 
   // headline drifts apart and dissolves as the scene takes over
   const lineShift = [
@@ -59,10 +71,23 @@ export function Hero() {
           }}
         />
 
-        {/* the monolith — interactive, scroll-driven */}
-        <div className="absolute inset-0">
+        {/* the monolith — interactive, scroll-driven; docks into the navbar */}
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={
+            reduce
+              ? { opacity: fadeOnly }
+              : {
+                  scale: dockScale,
+                  x: dockX,
+                  y: dockY,
+                  opacity: dockOpacity,
+                  transformOrigin: "50% 50%",
+                }
+          }
+        >
           <MonolithScene progress={scrollYProgress} />
-        </div>
+        </motion.div>
 
         {/* interface */}
         <div className="relative z-10 flex h-full flex-col justify-between px-6 pb-8 pt-28 md:px-12 md:pb-12">
