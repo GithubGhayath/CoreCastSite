@@ -644,16 +644,17 @@ export const timeSlots = [
 
 export const siteConfig = {
   name: "CORECAST",
-  title: "CORECAST — We Build Brands That People Remember",
+  title: "CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact.",
   description:
     "CORECAST is a cinematic marketing agency transforming ambitious businesses into unforgettable brands through branding, content creation, photography, reels production and performance marketing.",
   url: "https://corecast.agency",
-  email: "hello@corecast.agency",
-  phone: "+47 22 00 14 40",
-  address: "Skur 39, Vippetangen, 0150 Oslo, Norway",
+  email: "castcore51@gmail.com",
+  phone1: "+963 987 760 200",
+  phone2: "+963 987 760 201",
+  address: "Khalid Ibn Al-Walid Street, Damascus, Syria",
   socials: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Behance", href: "https://behance.net" },
+    { label: "Instagram", href: "https://www.instagram.com/c0recast" },
+    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61587098307701" },
     { label: "Vimeo", href: "https://vimeo.com" },
     { label: "LinkedIn", href: "https://linkedin.com" },
   ],
