@@ -6,6 +6,7 @@ import { WordReveal } from "@/components/ui/word-reveal";
 import { FadeUp, FrameReveal } from "@/components/ui/reveal";
 import { CinematicScene } from "@/components/ui/cinematic-scene";
 import { ContactCta } from "@/components/home/contact-cta";
+import TeamMarquee from "@/components/ui/TeamMarquee";
 
 export const metadata: Metadata = {
   title: "About",
@@ -91,9 +92,12 @@ export default function AboutPage() {
           lines={["The crew", "behind the cut."]}
         />
         <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 md:mt-24 lg:grid-cols-3">
-          {team.map((member, i) => (
-            <FadeUp key={member.name} delay={(i % 3) * 0.08}>
-              <div className="group border-t border-line pt-6 transition-colors duration-500 hover:border-accent">
+         
+           
+
+              <TeamMarquee team={team} />
+              {/* Old style */}
+              {/* <div className="group border-t border-line pt-6 transition-colors duration-500 hover:border-accent">
                 <p className="type-eyebrow text-fg-subtle">0{i + 1}</p>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight">
                   {member.name}
@@ -104,9 +108,9 @@ export default function AboutPage() {
                 <p className="mt-4 text-sm leading-relaxed text-fg-muted">
                   {member.bio}
                 </p>
-              </div>
-            </FadeUp>
-          ))}
+              </div> */}
+     
+        
         </div>
       </section>
 
