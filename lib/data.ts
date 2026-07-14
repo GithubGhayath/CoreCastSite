@@ -14,20 +14,148 @@ export const navLinks = [
 
 /* ============ CLIENTS ============ */
 
-export const clients = [
-  "NORDMARK",
-  "Atelier Une",
-  "HALVORSEN",
-  "Kessler & Co",
-  "MERIDIAN",
-  "Volt Athletics",
-  "CASA LUMEN",
-  "Øst Hotel",
-  "PRISMWEAR",
-  "Ferro Coffee",
-  "LINDQVIST",
-  "Aria Estates",
-] as const;
+
+export interface Client {
+  name: string;
+  description: string;
+  Logo: string;
+  contactInfo: string[];
+}
+
+export const clients: Client[] = [
+  {
+    name: "NORDMARK",
+    description:
+      "A Scandinavian architecture studio specializing in sustainable residential and commercial spaces.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
+    contactInfo: [
+      "info@nordmark.com",
+      "+46 123 456 789",
+      "Stockholm, Sweden",
+    ],
+  },
+  {
+    name: "Atelier Une",
+    description:
+      "Creative design agency delivering premium branding and digital experiences for luxury brands.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
+    contactInfo: [
+      "hello@atelierune.fr",
+      "+33 1 42 55 81 24",
+      "Paris, France",
+    ],
+  },
+  {
+    name: "HALVORSEN",
+    description:
+      "Industrial engineering company focused on precision manufacturing and automation.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    contactInfo: [
+      "contact@halvorsen.no",
+      "+47 22 45 98 11",
+      "Oslo, Norway",
+    ],
+  },
+  {
+    name: "Kessler & Co",
+    description:
+      "Business consulting firm helping enterprises optimize strategy and digital transformation.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg",
+    contactInfo: [
+      "office@kesslerco.com",
+      "+49 30 555 1234",
+      "Berlin, Germany",
+    ],
+  },
+  {
+    name: "MERIDIAN",
+    description:
+      "International logistics company providing smart freight and supply chain solutions.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+    contactInfo: [
+      "support@meridianlogistics.com",
+      "+44 20 7123 4567",
+      "London, UK",
+    ],
+  },
+  {
+    name: "Volt Athletics",
+    description:
+      "Sports performance company building personalized training experiences for athletes.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+    contactInfo: [
+      "hello@voltathletics.com",
+      "+1 206 555 0123",
+      "Seattle, USA",
+    ],
+  },
+  {
+    name: "CASA LUMEN",
+    description:
+      "Interior design studio creating elegant living spaces with timeless aesthetics.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Instagram.svg",
+    contactInfo: [
+      "info@casalumen.it",
+      "+39 06 555 8899",
+      "Rome, Italy",
+    ],
+  },
+  {
+    name: "Øst Hotel",
+    description:
+      "Boutique hospitality brand delivering premium guest experiences across Northern Europe.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    contactInfo: [
+      "stay@osthotel.com",
+      "+45 33 88 45 11",
+      "Copenhagen, Denmark",
+    ],
+  },
+  {
+    name: "PRISMWEAR",
+    description:
+      "Modern fashion label blending sustainability with contemporary streetwear.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+    contactInfo: [
+      "support@prismwear.com",
+      "+1 415 555 8877",
+      "San Francisco, USA",
+    ],
+  },
+  {
+    name: "Ferro Coffee",
+    description:
+      "Specialty coffee roaster sourcing premium beans from farms around the world.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Adobe_Inc._logo.svg",
+    contactInfo: [
+      "coffee@ferro.com",
+      "+61 2 8123 5566",
+      "Sydney, Australia",
+    ],
+  },
+  {
+    name: "LINDQVIST",
+    description:
+      "Furniture manufacturer known for handcrafted Scandinavian designs.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+    contactInfo: [
+      "sales@lindqvist.se",
+      "+46 31 445 778",
+      "Gothenburg, Sweden",
+    ],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+    contactInfo: [
+      "contact@ariaestates.com",
+      "+971 4 555 6677",
+      "Dubai, UAE",
+    ],
+  },
+];
 
 /* ============ STATS ============ */
 
