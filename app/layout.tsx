@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { siteConfig } from "@/lib/data";
 import "./globals.css";
+import { BackToTop } from "@/components/ui/BackToTop";
 import { almarai, mozillaText } from "./fonts";
 
 const anton = Anton({
@@ -120,6 +121,7 @@ export default function RootLayout({
             <Header />
             <main>{children}</main>
             <Footer />
+             <BackToTop />
           </Experience>
         </ThemeProvider>
       </body>
