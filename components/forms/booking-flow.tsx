@@ -19,6 +19,7 @@ interface Booking {
   slot: string;
   name: string;
   email: string;
+  phone: string;
   company: string;
   notes: string;
 }
@@ -53,6 +54,7 @@ export function BookingFlow() {
     slot: "",
     name: "",
     email: "",
+    phone: "",
     company: "",
     notes: "",
   });
@@ -61,11 +63,14 @@ export function BookingFlow() {
   const set = (patch: Partial<Booking>) =>
     setBooking((b) => ({ ...b, ...patch }));
 
+  const emailValid = /.+@.+\..+/.test(booking.email);
+  const phoneValid = booking.phone.replace(/\D/g, "").length >= 7;
+
   const canContinue = [
     booking.service !== "",
     booking.budget !== "",
     booking.date !== "" && booking.slot !== "",
-    booking.name.trim() !== "" && /.+@.+\..+/.test(booking.email),
+    booking.name.trim() !== "" && (emailValid || phoneValid),
     true,
   ][step];
 
@@ -88,7 +93,9 @@ export function BookingFlow() {
         <p className="mt-4 max-w-md text-fg-muted">
           {prettyDate &&
             `${prettyDate.weekday} ${prettyDate.day} ${prettyDate.month} at ${booking.slot} (CET) — `}
-          a calendar invitation is on its way to {booking.email}.
+          {booking.email
+            ? `a calendar invitation is on its way to ${booking.email}.`
+            : `we'll confirm the details by phone at ${booking.phone}.`}
         </p>
       </motion.div>
     );
@@ -235,7 +242,7 @@ export function BookingFlow() {
                       autoComplete="name"
                     />
                   </Field>
-                  <Field label="Email *" htmlFor="bk-email">
+                  <Field label="Email" htmlFor="bk-email">
                     <TextInput
                       id="bk-email"
                       type="email"
@@ -243,6 +250,20 @@ export function BookingFlow() {
                       onChange={(e) => set({ email: e.target.value })}
                       placeholder="ava@company.com"
                       autoComplete="email"
+                    />
+                  </Field>
+                  <Field
+                    label="Phone"
+                    htmlFor="bk-phone"
+                    hint="Email or phone — at least one is enough."
+                  >
+                    <TextInput
+                      id="bk-phone"
+                      type="tel"
+                      value={booking.phone}
+                      onChange={(e) => set({ phone: e.target.value })}
+                      placeholder="+47 400 00 000"
+                      autoComplete="tel"
                     />
                   </Field>
                   <Field label="Company" htmlFor="bk-company" className="md:col-span-2">
@@ -281,7 +302,7 @@ export function BookingFlow() {
                         : "",
                     ],
                     ["Who", `${booking.name}${booking.company ? ` — ${booking.company}` : ""}`],
-                    ["Email", booking.email],
+                    ["Reach you at", [booking.email, booking.phone].filter(Boolean).join(" · ")],
                   ].map(([k, v]) => (
                     <div key={k} className="border-b border-line pb-4">
                       <dt className="type-eyebrow text-fg-subtle">{k}</dt>

@@ -15,7 +15,7 @@ export function Stats() {
             delay={i * 0.08}
             className="border-line p-8 [&:nth-child(odd)]:border-r md:p-14 lg:[&:not(:last-child)]:border-r"
           >
-            <div className="type-display text-accent">
+            <div className="type-display text-gradient-pink">
               <Counter value={stat.value} suffix={stat.suffix} />
             </div>
             <p className="mt-4 text-sm font-medium text-fg-muted">

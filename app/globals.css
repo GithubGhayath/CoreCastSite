@@ -41,6 +41,22 @@
   --glow: rgba(216, 99, 165, 0.16);
   --selection-bg: #1d1c29;
   --selection-fg: #f6f4f9;
+  /* Logo mark outline: hidden on light surfaces, drawn on dark ones */
+  --logo-stroke: transparent;
+
+  /* Hero scene — light palette: airy lilac/peach glows on the light base */
+  --hero-void:
+    radial-gradient(85% 65% at 68% 22%, #ece3f7 0%, transparent 60%),
+    radial-gradient(60% 50% at 22% 78%, #fbe6ea 0%, transparent 55%),
+    radial-gradient(40% 35% at 55% 50%, rgba(216, 99, 165, 0.12) 0%, transparent 70%);
+  --hero-sweep: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(243, 141, 144, 0.22) 35%,
+    rgba(129, 93, 167, 0.12) 65%,
+    transparent
+  );
+  --hero-fog: #efeaf5;
 }
 
 [data-theme="dark"] {
@@ -60,6 +76,21 @@
   --glow: rgba(216, 99, 165, 0.12);
   --selection-bg: #d863a5;
   --selection-fg: #1d1c29;
+  --logo-stroke: currentColor;
+
+  /* Hero scene — dark palette: the original architectural void */
+  --hero-void:
+    radial-gradient(85% 65% at 68% 22%, #2b2142 0%, transparent 60%),
+    radial-gradient(60% 50% at 22% 78%, #241b33 0%, transparent 55%),
+    radial-gradient(40% 35% at 55% 50%, rgba(216, 99, 165, 0.1) 0%, transparent 70%);
+  --hero-sweep: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(243, 141, 144, 0.16) 35%,
+    rgba(129, 93, 167, 0.08) 65%,
+    transparent
+  );
+  --hero-fog: #1d1c29;
 }
 
 @theme inline {
@@ -133,7 +164,7 @@ body {
 .type-hero {
   font-family: var(--font-display);
   font-weight: 700;
-    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    font-size: clamp(2.5rem, 6.3vw, 6.2rem);
     line-height: 0.92;
     letter-spacing: -0.03em;
     text-transform: uppercase;
@@ -272,6 +303,20 @@ body {
 
 @utility text-gradient-brand {
   background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pink → purple gradient for emphasized words in headings */
+@utility text-gradient-pink {
+  background-image: linear-gradient(
+    92deg,
+    var(--brand-pink) 0%,
+    var(--brand-magenta) 32%,
+    var(--brand-purple) 72%,
+    var(--brand-violet) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

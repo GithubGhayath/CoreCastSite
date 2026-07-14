@@ -9,11 +9,13 @@ export function Field({
   htmlFor,
   children,
   className,
+  hint,
 }: {
   label: string;
   htmlFor: string;
   children: ReactNode;
   className?: string;
+  hint?: ReactNode;
 }) {
   return (
     <div className={className}>
@@ -21,6 +23,7 @@ export function Field({
         {label}
       </label>
       {children}
+      {hint && <p className="mt-2 text-xs text-fg-subtle">{hint}</p>}
     </div>
   );
 }

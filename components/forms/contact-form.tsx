@@ -12,9 +12,18 @@ const EASE = [0.65, 0.05, 0, 1] as const;
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const email = (data.get("email") as string)?.trim();
+    const phone = (data.get("phone") as string)?.trim();
+    if (!email && !phone) {
+      setError("Please add your email or phone so we can reply.");
+      return;
+    }
+    setError("");
     setSent(true);
   };
 
@@ -52,8 +61,15 @@ export function ContactForm() {
                 <Field label="Your name *" htmlFor="name">
                   <TextInput id="name" name="name" required placeholder="Ava Lindgren" autoComplete="name" />
                 </Field>
-                <Field label="Email *" htmlFor="email">
-                  <TextInput id="email" name="email" type="email" required placeholder="ava@company.com" autoComplete="email" />
+                <Field label="Email" htmlFor="email">
+                  <TextInput id="email" name="email" type="email" placeholder="ava@company.com" autoComplete="email" />
+                </Field>
+                <Field
+                  label="Phone"
+                  htmlFor="phone"
+                  hint="Email or phone — at least one is enough."
+                >
+                  <TextInput id="phone" name="phone" type="tel" placeholder="+47 400 00 000" autoComplete="tel" />
                 </Field>
                 <Field label="Company" htmlFor="company">
                   <TextInput id="company" name="company" placeholder="Company or brand" autoComplete="organization" />
@@ -76,6 +92,11 @@ export function ContactForm() {
                   placeholder="What are you building, and what should people remember about it?"
                 />
               </Field>
+              {error && (
+                <p role="alert" className="mt-6 text-sm font-medium text-accent">
+                  {error}
+                </p>
+              )}
               <div className="mt-12">
                 <Magnetic strength={0.3}>
                   <button

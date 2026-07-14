@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { LogoStacked } from "./logo";
 
 /**
- * Opening title card: a counter climbs to 100 while the wordmark
- * flickers in, then the curtain lifts in two acts.
+ * Opening title card: the logo sits centered and "fills up" from the
+ * bottom as a counter climbs to 100, then the curtain lifts.
  */
 export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [count, setCount] = useState(0);
@@ -39,27 +39,33 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence onExitComplete={onComplete}>
       {!exiting && (
         <motion.div
-          className="fixed inset-0 z-[300] flex items-end justify-between overflow-hidden bg-[#1d1c29] px-6 pb-6 md:px-12 md:pb-10"
+          className="fixed inset-0 z-[300] flex flex-col items-center justify-center overflow-hidden bg-[#1d1c29] px-6 text-[#f2eff6]"
           exit={{ y: "-100%" }}
           transition={{ duration: 1, ease: [0.65, 0.05, 0, 1] }}
           aria-hidden
         >
           <motion.div
-            className="text-[#f2eff6]"
-            exit={{ y: 80, opacity: 0 }}
+            className="flex flex-col items-center"
+            exit={{ opacity: 0, scale: 0.94 }}
             transition={{ duration: 0.5, ease: [0.65, 0.05, 0, 1] }}
           >
-            <span className="type-eyebrow text-[#a49fb6]">
-              A cinematic marketing agency
-            </span>
-            <LogoStacked className="mt-5 h-28 w-auto md:h-36" />
-          </motion.div>
-          <motion.div
-            className="type-display text-gradient-brand tabular-nums"
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.65, 0.05, 0, 1] }}
-          >
-            {count}
+            {/* the logo fills from the bottom up as the site loads */}
+            <div className="relative">
+              <LogoStacked className="h-32 w-auto opacity-[0.14] md:h-40" />
+              <div
+                className="absolute inset-0"
+                style={{ clipPath: `inset(${100 - count}% 0% 0% 0%)` }}
+              >
+                <LogoStacked className="h-32 w-auto md:h-40" />
+              </div>
+            </div>
+
+            <div className="mt-10 flex items-center gap-3">
+              <span className="type-eyebrow text-[#a49fb6]">Loading</span>
+              <span className="type-eyebrow tabular-nums text-[#f2eff6]">
+                {count}%
+              </span>
+            </div>
           </motion.div>
         </motion.div>
       )}

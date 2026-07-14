@@ -23,7 +23,7 @@ export default function ServicesPage() {
         lines={[
           "EVERYTHING",
           <span key="l">
-            A BRAND <span className="type-serif-accent text-accent">needs</span>
+            A BRAND <span className="type-serif-accent text-gradient-pink">needs</span>
           </span>,
           "TO BE SEEN.",
         ]}
