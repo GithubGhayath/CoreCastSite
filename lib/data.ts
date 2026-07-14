@@ -512,6 +512,7 @@ export interface TeamMember {
   name: string;
   role: string;
   bio: string;
+  image: string;
 }
 
 export const team: TeamMember[] = [
@@ -519,31 +520,37 @@ export const team: TeamMember[] = [
     name: "Mara Castellane",
     role: "Founder / Creative Director",
     bio: "Ex-film director. Believes every brand is a character study waiting to be cast.",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Theo Lindqvist",
     role: "Head of Strategy",
     bio: "Turns balance sheets into narratives. The one asking 'why' until it hurts.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Ada Okonkwo",
     role: "Design Director",
     bio: "Typography obsessive. Can spot a fake grid from across the room.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Rafael Duarte",
     role: "Director of Photography",
     bio: "Paints with practicals. Refuses to light anything the easy way.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Yuki Sørensen",
     role: "Head of Motion",
     bio: "Cut her first reel at fourteen. Thinks in 24 frames per second.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Leon Abramov",
     role: "Performance Lead",
     bio: "The data romantic. Proves beautiful work converts better — weekly.",
+     image: "/images/team/mara-castellane.jpg",
   },
 ];
 
