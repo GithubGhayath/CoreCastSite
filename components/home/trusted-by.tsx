@@ -1,8 +1,21 @@
-import { clients } from "@/lib/data";
+"use client";
+
+import { clients,Client } from "@/lib/data";
 import { Marquee } from "@/components/ui/marquee";
 import { FadeUp } from "@/components/ui/reveal";
+import ClientDialog from "@/components/ui/ClientDialog";
+import { useState } from "react";
+import Image from "next/image"; 
 
 export function TrustedBy() {
+const [selectedClient, setSelectedClient] = useState<Client | null>(null);
+
+
+  const ShowDialog = (client: Client) => {
+        setSelectedClient(client);
+  };
+
+
   return (
     <section className="border-b border-line py-16 md:py-24" aria-label="Trusted by">
       <FadeUp>
@@ -11,22 +24,32 @@ export function TrustedBy() {
         </p>
       </FadeUp>
       <FadeUp delay={0.15}>
-        <Marquee className="mt-10" duration={44}>
-          {clients.map((client) => (
-            <span
-              key={client}
-              className="mx-8 whitespace-nowrap text-2xl font-semibold tracking-tight text-fg-muted transition-colors duration-500 hover:text-fg md:mx-14 md:text-3xl"
-              style={
-                client === client.toUpperCase()
-                  ? { fontFamily: "var(--font-display)", fontWeight: 400, letterSpacing: "0.04em" }
-                  : { fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 400 }
-              }
-            >
-              {client}
-            </span>
-          ))}
-        </Marquee>
+
+       <Marquee className="mt-10" duration={44}>
+              {clients.map((client) => (
+                <button
+                  key={client.name}
+                  onClick={() => ShowDialog(client)}
+                  className="mx-8 flex h-20 w-36 items-center justify-center rounded-xl border border-line bg-surface/50 p-4 transition-all duration-300 hover:scale-105 hover:border-accent md:mx-14"
+                  title={client.name}
+                >
+                  <Image
+                    src={client.Logo}
+                    alt={`${client.name} logo`}
+                    width={120}
+                    height={60}
+                    className="max-h-12 w-auto object-contain"
+                  />
+                </button>
+              ))}
+      </Marquee>
+
       </FadeUp>
+        <ClientDialog
+        open={selectedClient !== null}
+        client={selectedClient}
+        onClose={() => setSelectedClient(null)}
+        />
     </section>
   );
 }
