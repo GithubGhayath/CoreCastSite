@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Float, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
@@ -18,10 +18,24 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
   const shardA = useRef<THREE.Mesh>(null);
   const shardB = useRef<THREE.Mesh>(null);
   const key = useRef<THREE.SpotLight>(null);
+  // hover glow — a pink light that tracks the pointer across the surface
+  const glow = useRef<THREE.PointLight>(null);
+  const [hovered, setHovered] = useState(false);
+  const glowTarget = useRef(new THREE.Vector3(0, 0, 2));
+  const glowLocal = useRef(new THREE.Vector3());
 
   useFrame(({ clock, camera, pointer }) => {
     const t = clock.getElapsedTime();
     const p = progress.get();
+
+    // ease the glow toward the last hovered point and fade with hover state
+    if (glow.current) {
+      glowLocal.current.copy(glowTarget.current);
+      glow.current.parent?.worldToLocal(glowLocal.current);
+      glow.current.position.lerp(glowLocal.current, 0.18);
+      const targetIntensity = hovered ? 110 : 0;
+      glow.current.intensity += (targetIntensity - glow.current.intensity) * 0.12;
+    }
 
     if (group.current) {
       // scroll drives the slow orbit; time adds breathing
@@ -72,9 +86,22 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
         intensity={38}
         distance={25}
       />
+      {/* hover glow — tracks the pointer, fades in only while over the form */}
+      <pointLight ref={glow} color="#e663a5" intensity={0} distance={9} decay={2} />
 
       <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.35}>
-        <group ref={group}>
+        <group
+          ref={group}
+          onPointerMove={(e) => {
+            e.stopPropagation();
+            glowTarget.current.copy(e.point);
+          }}
+          onPointerOver={(e) => {
+            e.stopPropagation();
+            setHovered(true);
+          }}
+          onPointerOut={() => setHovered(false)}
+        >
           {/* core slab — black stone */}
           <mesh castShadow>
             <boxGeometry args={[1.5, 3.6, 0.9]} />
@@ -165,8 +192,10 @@ function Dust() {
 
 export default function MonolithScene({
   progress,
+  fogColor = "#1d1c29",
 }: {
   progress: MotionValue<number>;
+  fogColor?: string;
 }) {
   return (
     <Canvas
@@ -175,7 +204,7 @@ export default function MonolithScene({
       gl={{ antialias: true, alpha: true }}
       className="!absolute inset-0"
     >
-      <fog attach="fog" args={["#1d1c29", 8, 20]} />
+      <fog attach="fog" args={[fogColor, 8, 20]} />
       <ambientLight intensity={0.12} />
       <ResponsiveStage>
         <MonolithForm progress={progress} />

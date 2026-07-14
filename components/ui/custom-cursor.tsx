@@ -1,23 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
+import { LogoMark } from "./logo";
 
 /**
- * Two-part cursor: a solid dot glued to the pointer and a lagging ring.
- * The ring inflates over interactive targets; elements can opt into a
- * text label via [data-cursor-label].
+ * Cursor: the CORECAST logo mark glued to the pointer. It grows slightly
+ * over interactive targets (links, buttons, inputs).
  */
 export function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
-  const [label, setLabel] = useState("");
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const ringX = useSpring(x, { stiffness: 400, damping: 40 });
-  const ringY = useSpring(y, { stiffness: 400, damping: 40 });
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -29,7 +26,6 @@ export function CustomCursor() {
         "a, button, [data-cursor-label], input, textarea, select, label"
       );
       setHovering(Boolean(target));
-      setLabel(target?.getAttribute("data-cursor-label") ?? "");
     };
 
     const move = (e: MouseEvent) => {
@@ -57,31 +53,14 @@ export function CustomCursor() {
   if (!enabled) return null;
 
   return (
-    <>
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[250] size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
-        style={{ x, y }}
-        animate={{ opacity: visible ? 1 : 0 }}
-        aria-hidden
-      />
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[249] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong"
-        style={{ x: ringX, y: ringY }}
-        animate={{
-          opacity: visible ? 1 : 0,
-          width: label ? 88 : hovering ? 56 : 36,
-          height: label ? 88 : hovering ? 56 : 36,
-          backgroundColor: label ? "var(--bg-inverse)" : "rgba(0, 0, 0, 0)",
-        }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        aria-hidden
-      >
-        {label && (
-          <span className="type-eyebrow !tracking-[0.14em] text-fg-inverse">
-            {label}
-          </span>
-        )}
-      </motion.div>
-    </>
+    <motion.div
+      className="pointer-events-none fixed left-0 top-0 z-[250] -translate-x-1/2 -translate-y-1/2"
+      style={{ x, y }}
+      animate={{ opacity: visible ? 1 : 0, scale: hovering ? 1.35 : 1 }}
+      transition={{ scale: { type: "spring", stiffness: 300, damping: 25 } }}
+      aria-hidden
+    >
+      <LogoMark className="h-6 w-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]" />
+    </motion.div>
   );
 }

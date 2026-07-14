@@ -22,7 +22,7 @@ export default function AboutPage() {
         lines={[
           "WE DIRECT",
           <span key="b">
-            BRANDS LIKE <span className="type-serif-accent text-accent">films</span>.
+            BRANDS LIKE <span className="type-serif-accent text-gradient-pink">films</span>.
           </span>,
         ]}
         intro="Founded by a film director and a strategist, CORECAST exists because most marketing is made to be skipped — and we refuse to make anything skippable."

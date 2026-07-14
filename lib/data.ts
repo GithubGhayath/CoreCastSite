@@ -299,7 +299,7 @@ export const projects: Project[] = [
     category: "Visual Identity",
     year: "2025",
     scene: "brand-identity",
-    accent: "#f79e83",
+    accent: "#815da7",
     summary:
       "A complete rebrand of a 104-year-old Scandinavian steel manufacturer — from industrial relic to design-world reference.",
     challenge:
@@ -347,7 +347,7 @@ export const projects: Project[] = [
     category: "Photography",
     year: "2024",
     scene: "photography",
-    accent: "#e663a5",
+    accent: "#815da7",
     summary:
       "A 200-image photographic library for a sculptural lighting house — shot like still-life cinema, graded like a film.",
     challenge:
@@ -371,7 +371,7 @@ export const projects: Project[] = [
     category: "Visual Identity",
     year: "2024",
     scene: "brand-identity",
-    accent: "#c9a0e0",
+    accent: "#815da7",
     summary:
       "Naming, identity and print system for a 31-room hotel carved into a former grain silo on the Oslo fjord.",
     challenge:
@@ -395,7 +395,7 @@ export const projects: Project[] = [
     category: "Reels & Video",
     year: "2024",
     scene: "content-creation",
-    accent: "#f38d90",
+    accent: "#815da7",
     summary:
       "A cinematic launch film and 12-part reel series for a specialty roaster entering three new markets at once.",
     challenge:
@@ -419,7 +419,7 @@ export const projects: Project[] = [
     category: "Photography",
     year: "2023",
     scene: "photography",
-    accent: "#9770c9",
+    accent: "#815da7",
     summary:
       "A brutalist-set campaign shoot that repositioned a streetwear label as a design object worth collecting.",
     challenge:

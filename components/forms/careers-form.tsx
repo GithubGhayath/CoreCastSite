@@ -17,6 +17,7 @@ export function CareersForm() {
   const [file, setFile] = useState<File | null>(null);
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
+  const [contactError, setContactError] = useState("");
   const [sent, setSent] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +44,14 @@ export function CareersForm() {
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const email = (data.get("email") as string)?.trim();
+    const phone = (data.get("phone") as string)?.trim();
+    if (!email && !phone) {
+      setContactError("Add an email or phone so we can reach you.");
+      return;
+    }
+    setContactError("");
     if (!file) {
       setError("Please attach your CV.");
       return;
@@ -84,8 +93,15 @@ export function CareersForm() {
                 <Field label="Your name *" htmlFor="ca-name">
                   <TextInput id="ca-name" name="name" required placeholder="Ava Lindgren" autoComplete="name" />
                 </Field>
-                <Field label="Email *" htmlFor="ca-email">
-                  <TextInput id="ca-email" name="email" type="email" required placeholder="ava@studio.com" autoComplete="email" />
+                <Field label="Email" htmlFor="ca-email">
+                  <TextInput id="ca-email" name="email" type="email" placeholder="ava@studio.com" autoComplete="email" />
+                </Field>
+                <Field
+                  label="Phone"
+                  htmlFor="ca-phone"
+                  hint="Email or phone — at least one is enough."
+                >
+                  <TextInput id="ca-phone" name="phone" type="tel" placeholder="+47 400 00 000" autoComplete="tel" />
                 </Field>
                 <Field label="Position *" htmlFor="ca-role">
                   <SelectInput
@@ -100,6 +116,11 @@ export function CareersForm() {
                   <TextInput id="ca-portfolio" name="portfolio" type="url" placeholder="https://…" />
                 </Field>
               </div>
+              {contactError && (
+                <p role="alert" className="mt-4 text-sm font-medium text-accent">
+                  {contactError}
+                </p>
+              )}
 
               {/* CV upload */}
               <div className="mt-10">

@@ -18,7 +18,7 @@ export default function CareersPage() {
         lines={[
           "DO THE BEST",
           <span key="w">
-            <span className="type-serif-accent text-accent">work</span> OF YOUR LIFE.
+            <span className="type-serif-accent text-gradient-pink">work</span> OF YOUR LIFE.
           </span>,
         ]}
         intro="Small crew, big productions, zero busywork. If you obsess over craft the way we do, there's a desk (and a very good espresso machine) waiting."

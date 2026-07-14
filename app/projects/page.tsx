@@ -18,7 +18,7 @@ export default function ProjectsPage() {
         lines={[
           "EVERY BRAND",
           <span key="l">
-            IS A <span className="type-serif-accent text-accent">story</span>.
+            IS A <span className="type-serif-accent text-gradient-pink">story</span>.
           </span>,
         ]}
         intro="A selection of transformations — identities forged, films cut, photographs lit. Filter by discipline or wander the whole reel."

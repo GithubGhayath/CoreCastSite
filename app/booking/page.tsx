@@ -16,7 +16,7 @@ export default function BookingPage() {
         lines={[
           "THIRTY MINUTES.",
           <span key="l">
-            ZERO <span className="type-serif-accent text-accent">obligation</span>.
+            ZERO <span className="type-serif-accent text-gradient-pink">obligation</span>.
           </span>,
         ]}
         intro="Pick a discipline, a budget and a slot. You'll leave the call with at least three ideas you can steal even if you never hire us."
