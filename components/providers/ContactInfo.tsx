@@ -4,7 +4,7 @@ export default function ContactInfo() {
     return(
         <p className="mt-6 max-w-sm text-sm leading-relaxed text-fg-muted">
                 <a
-                    href="https://www.google.com/maps/search/?api=1&query=Khalid+Ibn+Al+Walid+Street,+Damascus,+Syria"
+                    href="https://maps.app.goo.gl/e2vKPWwcbjdW93i47"
                     target="_blank"
                     rel="noopener noreferrer">
                   {siteConfig.address}
