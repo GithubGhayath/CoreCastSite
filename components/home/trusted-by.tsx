@@ -7,10 +7,10 @@ import ClientDialog from "@/components/ui/ClientDialog";
 import { useState } from "react";
 import Image from "next/image"; 
 
+
 export function TrustedBy() {
 const [selectedClient, setSelectedClient] = useState<Client | null>(null);
-
-
+  const [paused, setPaused] = useState(false);
   const ShowDialog = (client: Client) => {
         setSelectedClient(client);
   };
@@ -25,9 +25,11 @@ const [selectedClient, setSelectedClient] = useState<Client | null>(null);
       </FadeUp>
       <FadeUp delay={0.15}>
 
-       <Marquee className="mt-10" duration={44}>
+       <Marquee className="mt-10" duration={44} paused={paused} >
               {clients.map((client) => (
                 <button
+                  onMouseEnter={() => setPaused(true)}  
+                  onMouseLeave={() => setPaused(false)} 
                   key={client.name}
                   onClick={() => ShowDialog(client)}
                   className="mx-8 flex h-20 w-36 items-center justify-center rounded-xl border border-line bg-surface/50 p-4 transition-all duration-300 hover:scale-105 hover:border-accent md:mx-14"
