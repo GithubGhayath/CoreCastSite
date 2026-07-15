@@ -10,6 +10,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
+import { LanguageToggle } from "../ui/LanguageToggle";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
@@ -94,6 +95,7 @@ export function Header() {
                 Book a call
               </Link>
             </Magnetic>
+             <LanguageToggle/>
             <ThemeToggle />
             <Magnetic strength={0.4}>
               <button
