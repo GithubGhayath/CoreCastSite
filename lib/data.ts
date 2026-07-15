@@ -14,20 +14,148 @@ export const navLinks = [
 
 /* ============ CLIENTS ============ */
 
-export const clients = [
-  "NORDMARK",
-  "Atelier Une",
-  "HALVORSEN",
-  "Kessler & Co",
-  "MERIDIAN",
-  "Volt Athletics",
-  "CASA LUMEN",
-  "Øst Hotel",
-  "PRISMWEAR",
-  "Ferro Coffee",
-  "LINDQVIST",
-  "Aria Estates",
-] as const;
+
+export interface Client {
+  name: string;
+  description: string;
+  Logo: string;
+  contactInfo: string[];
+}
+
+export const clients: Client[] = [
+  {
+    name: "NORDMARK",
+    description:
+      "A Scandinavian architecture studio specializing in sustainable residential and commercial spaces.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
+    contactInfo: [
+      "info@nordmark.com",
+      "+46 123 456 789",
+      "Stockholm, Sweden",
+    ],
+  },
+  {
+    name: "Atelier Une",
+    description:
+      "Creative design agency delivering premium branding and digital experiences for luxury brands.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
+    contactInfo: [
+      "hello@atelierune.fr",
+      "+33 1 42 55 81 24",
+      "Paris, France",
+    ],
+  },
+  {
+    name: "HALVORSEN",
+    description:
+      "Industrial engineering company focused on precision manufacturing and automation.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    contactInfo: [
+      "contact@halvorsen.no",
+      "+47 22 45 98 11",
+      "Oslo, Norway",
+    ],
+  },
+  {
+    name: "Kessler & Co",
+    description:
+      "Business consulting firm helping enterprises optimize strategy and digital transformation.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg",
+    contactInfo: [
+      "office@kesslerco.com",
+      "+49 30 555 1234",
+      "Berlin, Germany",
+    ],
+  },
+  {
+    name: "MERIDIAN",
+    description:
+      "International logistics company providing smart freight and supply chain solutions.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+    contactInfo: [
+      "support@meridianlogistics.com",
+      "+44 20 7123 4567",
+      "London, UK",
+    ],
+  },
+  {
+    name: "Volt Athletics",
+    description:
+      "Sports performance company building personalized training experiences for athletes.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+    contactInfo: [
+      "hello@voltathletics.com",
+      "+1 206 555 0123",
+      "Seattle, USA",
+    ],
+  },
+  {
+    name: "CASA LUMEN",
+    description:
+      "Interior design studio creating elegant living spaces with timeless aesthetics.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Instagram.svg",
+    contactInfo: [
+      "info@casalumen.it",
+      "+39 06 555 8899",
+      "Rome, Italy",
+    ],
+  },
+  {
+    name: "Øst Hotel",
+    description:
+      "Boutique hospitality brand delivering premium guest experiences across Northern Europe.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    contactInfo: [
+      "stay@osthotel.com",
+      "+45 33 88 45 11",
+      "Copenhagen, Denmark",
+    ],
+  },
+  {
+    name: "PRISMWEAR",
+    description:
+      "Modern fashion label blending sustainability with contemporary streetwear.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+    contactInfo: [
+      "support@prismwear.com",
+      "+1 415 555 8877",
+      "San Francisco, USA",
+    ],
+  },
+  {
+    name: "Ferro Coffee",
+    description:
+      "Specialty coffee roaster sourcing premium beans from farms around the world.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Adobe_Inc._logo.svg",
+    contactInfo: [
+      "coffee@ferro.com",
+      "+61 2 8123 5566",
+      "Sydney, Australia",
+    ],
+  },
+  {
+    name: "LINDQVIST",
+    description:
+      "Furniture manufacturer known for handcrafted Scandinavian designs.",
+   Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+    contactInfo: [
+      "sales@lindqvist.se",
+      "+46 31 445 778",
+      "Gothenburg, Sweden",
+    ],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+    contactInfo: [
+      "contact@ariaestates.com",
+      "+971 4 555 6677",
+      "Dubai, UAE",
+    ],
+  },
+];
 
 /* ============ STATS ============ */
 
@@ -299,7 +427,7 @@ export const projects: Project[] = [
     category: "Visual Identity",
     year: "2025",
     scene: "brand-identity",
-    accent: "#f79e83",
+    accent: "#815da7",
     summary:
       "A complete rebrand of a 104-year-old Scandinavian steel manufacturer — from industrial relic to design-world reference.",
     challenge:
@@ -347,7 +475,7 @@ export const projects: Project[] = [
     category: "Photography",
     year: "2024",
     scene: "photography",
-    accent: "#e663a5",
+    accent: "#815da7",
     summary:
       "A 200-image photographic library for a sculptural lighting house — shot like still-life cinema, graded like a film.",
     challenge:
@@ -371,7 +499,7 @@ export const projects: Project[] = [
     category: "Visual Identity",
     year: "2024",
     scene: "brand-identity",
-    accent: "#c9a0e0",
+    accent: "#815da7",
     summary:
       "Naming, identity and print system for a 31-room hotel carved into a former grain silo on the Oslo fjord.",
     challenge:
@@ -395,7 +523,7 @@ export const projects: Project[] = [
     category: "Reels & Video",
     year: "2024",
     scene: "content-creation",
-    accent: "#f38d90",
+    accent: "#815da7",
     summary:
       "A cinematic launch film and 12-part reel series for a specialty roaster entering three new markets at once.",
     challenge:
@@ -419,7 +547,7 @@ export const projects: Project[] = [
     category: "Photography",
     year: "2023",
     scene: "photography",
-    accent: "#9770c9",
+    accent: "#815da7",
     summary:
       "A brutalist-set campaign shoot that repositioned a streetwear label as a design object worth collecting.",
     challenge:
@@ -512,6 +640,7 @@ export interface TeamMember {
   name: string;
   role: string;
   bio: string;
+  image: string;
 }
 
 export const team: TeamMember[] = [
@@ -519,31 +648,37 @@ export const team: TeamMember[] = [
     name: "Mara Castellane",
     role: "Founder / Creative Director",
     bio: "Ex-film director. Believes every brand is a character study waiting to be cast.",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Theo Lindqvist",
     role: "Head of Strategy",
     bio: "Turns balance sheets into narratives. The one asking 'why' until it hurts.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Ada Okonkwo",
     role: "Design Director",
     bio: "Typography obsessive. Can spot a fake grid from across the room.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Rafael Duarte",
     role: "Director of Photography",
     bio: "Paints with practicals. Refuses to light anything the easy way.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Yuki Sørensen",
     role: "Head of Motion",
     bio: "Cut her first reel at fourteen. Thinks in 24 frames per second.",
+     image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Leon Abramov",
     role: "Performance Lead",
     bio: "The data romantic. Proves beautiful work converts better — weekly.",
+     image: "/images/team/mara-castellane.jpg",
   },
 ];
 

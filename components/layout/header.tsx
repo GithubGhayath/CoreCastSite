@@ -5,10 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks, siteConfig } from "@/lib/data";
+import { useTheme } from "@/components/providers/theme-provider";
 import { Magnetic } from "@/components/ui/magnetic";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
+import { LanguageToggle } from "../ui/LanguageToggle";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
@@ -17,6 +19,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const pathname = usePathname();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,9 +45,10 @@ export function Header() {
   // The homepage opens as a full-frame cinematic scene: the navbar
   // stays out of the shot until the visitor scrolls, then slides in.
   const hiddenInHero = pathname === "/" && !pastHero && !open;
-  // While the header floats transparently over the dark hero,
-  // borrow the dark theme's ink.
-  const overDarkScene = pathname === "/" && !scrolled && !open;
+  // While the header floats transparently over the hero, borrow the dark
+  // theme's ink — but only when the hero is actually dark (dark mode).
+  const overDarkScene =
+    pathname === "/" && !scrolled && !open && theme === "dark";
   // The logo "lands" into the bar as the hero monolith docks. On every
   // other route it is simply present from the start.
   const logoLanded = pathname !== "/" || pastHero || open;
@@ -63,22 +67,24 @@ export function Header() {
         }}
       >
         <div className="flex items-center justify-between px-6 py-5 md:px-12">
-          <Magnetic strength={0.25}>
-            <Link href="/" aria-label="CORECAST home" className="block">
-              <motion.span
-                className="block origin-left will-change-transform"
-                initial={false}
-                animate={
-                  logoLanded
-                    ? { scale: 1, opacity: 1 }
-                    : { scale: 1.35, opacity: 0 }
-                }
-                transition={{ duration: 0.6, ease: EASE }}
-              >
-                <Logo />
-              </motion.span>
-            </Link>
-          </Magnetic>
+          <Link
+            href="/"
+            aria-label="CORECAST home"
+            className="block transition-[filter] duration-500 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)] hover:drop-shadow-[0_0_10px_rgba(216,99,165,0.55)]"
+          >
+            <motion.span
+              className="block origin-left will-change-transform"
+              initial={false}
+              animate={
+                logoLanded
+                  ? { scale: 1, opacity: 1 }
+                  : { scale: 1.35, opacity: 0 }
+              }
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <Logo />
+            </motion.span>
+          </Link>
 
           <div className="flex items-center gap-4">
             <Magnetic strength={0.3}>
@@ -89,6 +95,7 @@ export function Header() {
                 Book a call
               </Link>
             </Magnetic>
+             <LanguageToggle/>
             <ThemeToggle />
             <Magnetic strength={0.4}>
               <button
@@ -145,8 +152,8 @@ export function Header() {
                         className={cn(
                           "type-title transition-colors duration-500",
                           pathname === link.href
-                            ? "text-accent"
-                            : "text-fg group-hover:text-accent"
+                            ? "text-gradient-pink"
+                            : "text-fg group-hover:text-gradient-pink"
                         )}
                       >
                         {link.label}

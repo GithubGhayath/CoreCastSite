@@ -19,7 +19,7 @@ export default function ContactPage() {
         lines={[
           "TELL US YOUR",
           <span key="s">
-            <span className="type-serif-accent text-accent">story</span> SO FAR.
+            <span className="type-serif-accent text-gradient-pink">story</span> SO FAR.
           </span>,
         ]}
         intro="A paragraph is enough. We read everything, and we answer within one business day."

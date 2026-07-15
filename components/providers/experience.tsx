@@ -16,7 +16,7 @@ import { CustomCursor } from "@/components/ui/custom-cursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ExperienceContext = createContext<{ ready: boolean }>({ ready: false });
+const ExperienceContext = createContext<{ ready: boolean; lenis: Lenis | null }>({ ready: false, lenis: null });
 
 export function useExperience() {
   return useContext(ExperienceContext);
@@ -59,7 +59,7 @@ export function Experience({ children }: { children: ReactNode }) {
   }, [ready]);
 
   return (
-    <ExperienceContext.Provider value={{ ready }}>
+    <ExperienceContext.Provider value={{ ready , lenis: lenisRef.current }}>
       <Preloader onComplete={() => setReady(true)} />
       <CustomCursor />
       {children}

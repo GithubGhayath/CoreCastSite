@@ -4,6 +4,7 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useExperience } from "@/components/providers/experience";
+import { useTheme } from "@/components/providers/theme-provider";
 import { CtaButton } from "@/components/ui/button";
 
 const MonolithScene = dynamic(() => import("@/components/three/monolith"), {
@@ -15,6 +16,7 @@ const HEADLINE = ["From the core of every story,", "we shape identity,", "define
 
 export function Hero() {
   const { ready } = useExperience();
+  const { theme } = useTheme();
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -47,7 +49,6 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      data-theme="dark"
       className="relative h-[165vh] text-fg"
       aria-label="CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact."
     >
@@ -55,20 +56,11 @@ export function Hero() {
         {/* architectural void behind the monolith */}
         <div
           className="animate-slow-drift absolute inset-[-10%]"
-          style={{
-            background: `
-              radial-gradient(85% 65% at 68% 22%, #2b2142 0%, transparent 60%),
-              radial-gradient(60% 50% at 22% 78%, #241b33 0%, transparent 55%),
-              radial-gradient(40% 35% at 55% 50%, rgba(216,99,165,0.10) 0%, transparent 70%)
-            `,
-          }}
+          style={{ background: "var(--hero-void)" }}
         />
         <div
           className="animate-light-sweep absolute inset-y-[-25%] left-1/2 w-[34%] -translate-x-1/2 blur-3xl"
-          style={{
-            background:
-              "linear-gradient(to bottom, transparent, rgba(243,141,144,0.16) 35%, rgba(129,93,167,0.08) 65%, transparent)",
-          }}
+          style={{ background: "var(--hero-sweep)" }}
         />
 
         {/* the monolith — interactive, scroll-driven; docks into the navbar */}
@@ -86,14 +78,18 @@ export function Hero() {
                 }
           }
         >
-          <MonolithScene progress={scrollYProgress} />
+          <MonolithScene
+            progress={scrollYProgress}
+            fogColor={theme === "dark" ? "#1d1c29" : "#efeaf5"}
+          />
         </motion.div>
 
-        {/* interface */}
-        <div className="relative z-10 flex h-full flex-col justify-between px-6 pb-8 pt-28 md:px-12 md:pb-12">
+        {/* interface — pointer-events pass through empty areas so the
+            monolith below stays hoverable; re-enabled on the content */}
+        <div className="pointer-events-none relative z-10 flex h-full flex-col justify-between px-6 pb-8 pt-28 md:px-12 md:pb-12">
           <div className="flex-1" />
 
-          <div>
+          <div className="pointer-events-auto">
             <h1 className="type-hero" aria-label="From the core of every story, we shape identity, define vision, and create lasting impact.">
               {HEADLINE.map((line, i) => (
                 <span key={line} className="block overflow-hidden">

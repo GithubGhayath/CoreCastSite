@@ -67,15 +67,7 @@ export function Footer() {
               </ul>
             </div>
 
-            <Magnetic strength={0.4}>
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                aria-label="Back to top"
-                className="flex size-12 items-center justify-center rounded-full border border-line transition-colors duration-500 hover:border-line-strong"
-              >
-                <ArrowUp className="size-4" strokeWidth={1.5} />
-              </button>
-            </Magnetic>
+            
           </div>
         </FadeUp>
 

@@ -21,7 +21,7 @@ export default function ReviewsPage() {
         lines={[
           "TAKE THEIR",
           <span key="w">
-            <span className="type-serif-accent text-accent">word</span> FOR IT.
+            <span className="type-serif-accent text-gradient-pink">word</span> FOR IT.
           </span>,
         ]}
         intro="We could talk about ourselves all day. The people who signed the invoices tell it better."

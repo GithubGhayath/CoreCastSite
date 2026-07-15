@@ -6,15 +6,20 @@ export function Marquee({
   children,
   className,
   duration = 36,
+  paused = false,
 }: {
   children: ReactNode;
   className?: string;
   duration?: number;
+  paused?: boolean;
 }) {
   return (
     <div className={cn("overflow-hidden", className)}>
       <div
-        className="animate-marquee flex w-max items-center"
+        className={cn(
+          "animate-marquee flex w-max items-center",
+          paused && "marquee-paused"
+        )}
         style={{ "--marquee-duration": `${duration}s` } as React.CSSProperties}
       >
         <div className="flex shrink-0 items-center">{children}</div>
