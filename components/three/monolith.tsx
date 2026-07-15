@@ -1,17 +1,66 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, Float, Lightformer } from "@react-three/drei";
+import { Center, Environment, Float, Lightformer, Resize, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import type { MotionValue } from "framer-motion";
 
 /**
- * The CORECAST monolith — black stone, smoked glass and brushed metal
- * suspended in a dark architectural void. Warm light sweeps across it,
- * dust drifts, and scroll slowly orbits the camera as the form
- * "takes shape". Stands in for (and layers under) the Seedance hero clip.
+ * The CORECAST monolith — the brand logo cast in brushed metal, suspended
+ * in a dark architectural void. Warm light sweeps across it, dust drifts,
+ * and scroll slowly orbits the camera as the form "takes shape".
+ * Stands in for (and layers under) the Seedance hero clip.
  */
+
+const LOGO_URL = "/corecast-logo.glb";
+
+/**
+ * The logo GLB ships as an extruded SVG with a flat black material, which
+ * reads as a silhouette against the void — so we swap in brushed metal that
+ * catches the sweeping key light.
+ */
+function LogoModel() {
+  const { scene } = useGLTF(LOGO_URL);
+
+  const model = useMemo(() => scene.clone(true), [scene]);
+
+  const material = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: "#2b2536",
+        metalness: 0.95,
+        roughness: 0.22,
+        clearcoat: 1,
+        clearcoatRoughness: 0.25,
+      }),
+    []
+  );
+
+  useEffect(() => {
+    model.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material = material;
+        child.castShadow = true;
+      }
+    });
+  }, [model, material]);
+
+  useEffect(() => () => material.dispose(), [material]);
+
+  // The GLB exports Z-up, so the logo lands lying flat in the XZ plane —
+  // the X rotation stands it up facing the camera. Center + Resize measure
+  // the rotated bounds, so framing holds whatever units the GLB was authored in.
+  return (
+    <Center>
+      <Resize scale={3.6}>
+        <primitive object={model} rotation={[Math.PI / 2, 0, 0]} />
+      </Resize>
+    </Center>
+  );
+}
+
+useGLTF.preload(LOGO_URL);
 
 function MonolithForm({ progress }: { progress: MotionValue<number> }) {
   const group = useRef<THREE.Group>(null);
@@ -102,44 +151,12 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
           }}
           onPointerOut={() => setHovered(false)}
         >
-          {/* core slab — black stone */}
-          <mesh castShadow>
-            <boxGeometry args={[1.5, 3.6, 0.9]} />
-            <meshPhysicalMaterial
-              color="#131019"
-              metalness={0.4}
-              roughness={0.55}
-              clearcoat={0.6}
-              clearcoatRoughness={0.4}
-            />
-          </mesh>
-          {/* smoked glass fin */}
-          <mesh position={[0.1, 0.2, 0.52]} rotation={[0, 0.08, 0]}>
-            <boxGeometry args={[1.1, 2.9, 0.16]} />
-            <meshPhysicalMaterial
-              color="#181422"
-              metalness={0.1}
-              roughness={0.05}
-              transmission={0.65}
-              thickness={1.4}
-              ior={1.45}
-              transparent
-            />
-          </mesh>
-          {/* brushed metal spine */}
-          <mesh position={[-0.55, -0.15, 0]} rotation={[0, 0, 0.02]}>
-            <boxGeometry args={[0.22, 4.1, 0.5]} />
-            <meshStandardMaterial color="#8d86a0" metalness={0.95} roughness={0.32} />
-          </mesh>
+          {/* the CORECAST logo, cast in brushed metal */}
+          <Suspense fallback={null}>
+            <LogoModel />
+          </Suspense>
           {/* orbiting shards */}
-          <mesh ref={shardA}>
-            <boxGeometry args={[0.34, 0.9, 0.2]} />
-            <meshStandardMaterial color="#141118" metalness={0.85} roughness={0.25} />
-          </mesh>
-          <mesh ref={shardB}>
-            <boxGeometry args={[0.24, 0.6, 0.16]} />
-            <meshStandardMaterial color="#8d86a0" metalness={0.95} roughness={0.3} />
-          </mesh>
+
         </group>
       </Float>
     </>

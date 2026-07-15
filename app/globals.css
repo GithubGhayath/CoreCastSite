@@ -164,7 +164,7 @@ body {
 .type-hero {
   font-family: var(--font-display);
   font-weight: 700;
-    font-size: clamp(2.5rem, 6.3vw, 6.2rem);
+    font-size: clamp(2.1rem, 5.2vw, 5rem);
     line-height: 0.92;
     letter-spacing: -0.03em;
     text-transform: uppercase;

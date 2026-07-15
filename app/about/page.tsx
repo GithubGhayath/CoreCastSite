@@ -91,26 +91,8 @@ export default function AboutPage() {
           eyebrow="The people"
           lines={["The crew", "behind the cut."]}
         />
-        <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 md:mt-24 lg:grid-cols-3">
-         
-           
-
-              <TeamMarquee team={team} />
-              {/* Old style */}
-              {/* <div className="group border-t border-line pt-6 transition-colors duration-500 hover:border-accent">
-                <p className="type-eyebrow text-fg-subtle">0{i + 1}</p>
-                <h3 className="mt-4 text-xl font-semibold tracking-tight">
-                  {member.name}
-                </h3>
-                <p className="type-serif-accent mt-1 text-lg text-accent">
-                  {member.role}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-                  {member.bio}
-                </p>
-              </div> */}
-     
-        
+        <div className="mt-16 md:mt-24">
+          <TeamMarquee team={team} />
         </div>
       </section>
 

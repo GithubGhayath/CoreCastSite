@@ -146,7 +146,7 @@ export function BookingFlow() {
             transition={{ duration: 0.5, ease: EASE }}
           >
             {step === 0 && (
-              <fieldset>
+              <fieldset className="min-w-0">
                 <legend className="type-statement">
                   What should we talk about?
                 </legend>
@@ -165,7 +165,7 @@ export function BookingFlow() {
             )}
 
             {step === 1 && (
-              <fieldset>
+              <fieldset className="min-w-0">
                 <legend className="type-statement">
                   Roughly, the investment level?
                 </legend>
@@ -187,7 +187,11 @@ export function BookingFlow() {
             )}
 
             {step === 2 && (
-              <fieldset>
+              // min-w-0 defeats the UA stylesheet's `min-inline-size: min-content`
+              // on fieldset — without it the element cannot shrink below the day
+              // strip's intrinsic width, so the scroller below never scrolls and
+              // the whole card overflows the viewport instead.
+              <fieldset className="min-w-0">
                 <legend className="type-statement">Pick your moment.</legend>
                 <div className="mt-8 flex gap-3 overflow-x-auto pb-3">
                   {days.map((d) => (
@@ -230,7 +234,7 @@ export function BookingFlow() {
             )}
 
             {step === 3 && (
-              <fieldset>
+              <fieldset className="min-w-0">
                 <legend className="type-statement">Who are we meeting?</legend>
                 <div className="mt-8 grid gap-8 md:grid-cols-2">
                   <Field label="Your name *" htmlFor="bk-name">
