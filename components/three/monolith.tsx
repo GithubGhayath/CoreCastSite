@@ -156,14 +156,7 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
             <LogoModel />
           </Suspense>
           {/* orbiting shards */}
-          <mesh ref={shardA}>
-            <boxGeometry args={[0.34, 0.9, 0.2]} />
-            <meshStandardMaterial color="#141118" metalness={0.85} roughness={0.25} />
-          </mesh>
-          <mesh ref={shardB}>
-            <boxGeometry args={[0.24, 0.6, 0.16]} />
-            <meshStandardMaterial color="#8d86a0" metalness={0.95} roughness={0.3} />
-          </mesh>
+
         </group>
       </Float>
     </>

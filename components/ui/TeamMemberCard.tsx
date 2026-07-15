@@ -19,7 +19,8 @@ export default function TeamMemberCard({
       group
       relative
       h-[540px]
-      w-[460px]
+      w-[min(85vw,460px)]
+      shrink-0
       overflow-hidden
       rounded-[28px]
       border
