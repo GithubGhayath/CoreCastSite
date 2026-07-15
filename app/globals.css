@@ -355,6 +355,12 @@ body {
 }
 
 
+/* ============================================
+   MARQUEE INTERACTION
+   Pause marquee animation when a client item 
+   is hovered. The React component toggles this 
+   class to control animation-play-state.
+   ============================================ */
 .marquee-paused {
   animation-play-state: paused !important;
 }
