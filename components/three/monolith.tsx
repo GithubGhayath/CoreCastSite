@@ -13,7 +13,7 @@ import type { MotionValue } from "framer-motion";
  * Stands in for (and layers under) the Seedance hero clip.
  */
 
-const LOGO_URL = "/core_cast_web_site/corecast-logo.glb";
+const LOGO_URL = "/CoreCastSite/corecast-logo.glb";
 
 /**
  * The logo GLB ships as an extruded SVG with a flat black material, which

@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
 
-  basePath: isProd ? "/core_cast_web_site" : "",
-  assetPrefix: isProd ? "/core_cast_web_site/" : "",
+  basePath: isProd ? "/CoreCastSite" : "",
+  assetPrefix: isProd ? "/CoreCastSite/" : "",
 };
 
 export default nextConfig;
