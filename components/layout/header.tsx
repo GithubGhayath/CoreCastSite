@@ -12,6 +12,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
+import { LanguageToggle } from "../ui/LanguageToggle";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
