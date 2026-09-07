@@ -12,7 +12,6 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Preloader } from "@/components/ui/preloader";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +23,7 @@ export function useExperience() {
 
 /**
  * Wires the cinematic runtime: Lenis smooth scroll synced to GSAP's
- * ticker + ScrollTrigger, the preloader curtain, and the custom cursor.
+ * ticker + ScrollTrigger, and the preloader curtain.
  */
 export function Experience({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
@@ -61,7 +60,6 @@ export function Experience({ children }: { children: ReactNode }) {
   return (
     <ExperienceContext.Provider value={{ ready , lenis: lenisRef.current }}>
       <Preloader onComplete={() => setReady(true)} />
-      <CustomCursor />
       {children}
     </ExperienceContext.Provider>
   );

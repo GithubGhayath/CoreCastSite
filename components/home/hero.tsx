@@ -19,7 +19,9 @@ export function Hero() {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const HEADLINE = [t("hero.line1"), t("hero.line2"), t("hero.line3"), t("hero.line4")];
+  const HEADLINE_LINE1 = t("hero.line1");
+  const HEADLINE_LINE2_PREFIX = t("hero.line2Prefix");
+  const HEADLINE_ACCENT = t("hero.accent");
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -41,8 +43,6 @@ export function Hero() {
   const lineShift = [
     useTransform(scrollYProgress, [0, 0.6], ["0%", "-18%"]),
     useTransform(scrollYProgress, [0, 0.6], ["0%", "10%"]),
-    useTransform(scrollYProgress, [0, 0.6], ["0%", "-30%"]),
-    useTransform(scrollYProgress, [0, 0.6], ["0%", "22%"]),
   ];
   const headlineOpacity = useTransform(scrollYProgress, [0.25, 0.62], [1, 0]);
   const uiOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
@@ -92,7 +92,16 @@ export function Hero() {
 
           <div className="pointer-events-auto">
             <h1 className="type-hero" aria-label={t("hero.ariaLabel")}>
-              {HEADLINE.map((line, i) => (
+              {[
+                HEADLINE_LINE1,
+                <>
+                  {HEADLINE_LINE2_PREFIX}{" "}
+                  <span className="type-serif-accent text-gradient-brand">
+                    {HEADLINE_ACCENT}
+                  </span>
+                  .
+                </>,
+              ].map((line, i) => (
                 <span key={i} className="block overflow-hidden">
                   <motion.span
                     className="block will-change-transform"
@@ -104,16 +113,7 @@ export function Hero() {
                       animate={ready ? { y: "0%" } : {}}
                       transition={{ duration: 1.1, ease: EASE, delay: 0.15 + i * 0.11 }}
                     >
-                      {i === 3 ? (
-                        <>
-                          <span className="type-serif-accent text-gradient-brand">
-                            {t("hero.accent")}
-                          </span>
-                          .
-                        </>
-                      ) : (
-                        line
-                      )}
+                      {line}
                     </motion.span>
                   </motion.span>
                 </span>
