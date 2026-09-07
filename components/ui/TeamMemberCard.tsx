@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import "../../app/globals.css";
+import { useLanguage } from "@/components/providers/language-provider";
 type Props = {
   name: string;
   role: string;
@@ -13,6 +16,7 @@ export default function TeamMemberCard({
   bio,
   image,
 }: Props) {
+  const { t } = useLanguage();
   return (
     <div
       className="
@@ -95,7 +99,7 @@ export default function TeamMemberCard({
       {/* Bottom strip */}
       <div className="absolute bottom-0 left-0 flex h-14 w-full items-center justify-center border-t border-line bg-card backdrop-blur-md">
         <span className="text-xs tracking-[0.35em] text-fg-muted">
-          CREATIVE • CORECAST
+          {t("teamCard.creative")} • CORECAST
         </span>
       </div>
     </div>

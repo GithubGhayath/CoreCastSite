@@ -5,6 +5,8 @@ import { type Project } from "@/lib/data";
 import { scenes } from "@/lib/media";
 import { CinematicScene } from "./cinematic-scene";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeCategory } from "@/lib/i18n/localize";
 
 /**
  * Art-directed typographic poster for a project — the cinematic
@@ -22,6 +24,7 @@ export function ProjectPoster({
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const clip = scenes[project.scene].video;
+  const { locale } = useLanguage();
 
   const play = () => {
     const v = videoRef.current;
@@ -70,7 +73,7 @@ export function ProjectPoster({
       />
       <div className="absolute inset-0 z-10 flex flex-col justify-between p-6 md:p-8">
         <div className="flex items-start justify-between">
-          <span className="type-eyebrow text-white/60">{project.category}</span>
+          <span className="type-eyebrow text-white/60">{localizeCategory(project.category, locale)}</span>
           <span className="type-eyebrow text-white/60">{project.year}</span>
         </div>
         <div>

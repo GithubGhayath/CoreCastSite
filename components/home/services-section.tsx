@@ -8,6 +8,8 @@ import { services } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CinematicScene } from "@/components/ui/cinematic-scene";
 import { FadeUp } from "@/components/ui/reveal";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeService } from "@/lib/i18n/localize";
 
 export function ServicesSection() {
   const [active, setActive] = useState<number | null>(null);
@@ -15,6 +17,8 @@ export function ServicesSection() {
   const y = useMotionValue(0);
   const px = useSpring(x, { stiffness: 120, damping: 18 });
   const py = useSpring(y, { stiffness: 120, damping: 18 });
+  const { t, locale } = useLanguage();
+  const localized = services.map((s) => localizeService(s, locale));
 
   return (
     <section
@@ -27,16 +31,16 @@ export function ServicesSection() {
     >
       <SectionHeading
         index="02"
-        eyebrow="What we direct"
-        lines={["Every frame", "in service of", "the brand."]}
+        eyebrow={t("home.services.eyebrow")}
+        lines={[t("home.services.line1"), t("home.services.line2"), t("home.services.line3")]}
       />
 
       <div className="mt-16 border-t border-line md:mt-24">
-        {services.map((service, i) => (
+        {localized.map((service, i) => (
           <FadeUp key={service.slug} delay={i * 0.05}>
             <Link
               href={`/services#${service.slug}`}
-              data-cursor-label="Open"
+              data-cursor-label={t("common.open")}
               className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-6 border-b border-line py-8 transition-colors duration-500 hover:bg-card md:grid-cols-[80px_1fr_1fr_auto] md:gap-10 md:py-10"
               onMouseEnter={() => setActive(i)}
               onMouseLeave={() => setActive(null)}
@@ -69,10 +73,10 @@ export function ServicesSection() {
             transition={{ duration: 0.35, ease: [0.65, 0.05, 0, 1] }}
             aria-hidden
           >
-            <CinematicScene scene={services[active].scene} dim={0.2} />
+            <CinematicScene scene={localized[active].scene} dim={0.2} />
             <div className="absolute bottom-3 left-4 z-10">
               <span className="type-eyebrow text-white/70">
-                {services[active].title}
+                {localized[active].title}
               </span>
             </div>
           </motion.div>

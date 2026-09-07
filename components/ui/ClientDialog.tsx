@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import {Client} from "../../lib/data"
+import { useLanguage } from "@/components/providers/language-provider";
 
 type Props = {
   open: boolean;
@@ -14,6 +15,7 @@ export default function ClientDialog({
   onClose,
   client,
 }: Props) {
+  const { t } = useLanguage();
   if (!open || !client) return null;
 
   return (
@@ -48,7 +50,7 @@ export default function ClientDialog({
 
         <div className="mt-8">
          <h3 className="mb-3 font-semibold">
-          Contact Information
+          {t("clientDialog.contactInformation")}
         </h3>
 
         <div className="flex flex-wrap gap-2">

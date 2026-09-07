@@ -7,10 +7,10 @@ import { bookingBudgets, bookingServices, timeSlots } from "@/lib/data";
 import { ChoicePill, Field, TextArea, TextInput } from "@/components/ui/field";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeBookingService } from "@/lib/i18n/localize";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
-
-const STEPS = ["Discipline", "Budget", "Date & time", "Details", "Confirm"] as const;
 
 interface Booking {
   service: string;
@@ -25,26 +25,30 @@ interface Booking {
 }
 
 /** Next 14 weekdays, computed on the client. */
-function useUpcomingDays() {
+function useUpcomingDays(locale: "ar" | "en") {
   return useMemo(() => {
     const days: { iso: string; weekday: string; day: number; month: string }[] = [];
     const cursor = new Date();
+    const intlLocale = locale === "ar" ? "ar" : "en-GB";
     while (days.length < 14) {
       cursor.setDate(cursor.getDate() + 1);
       const dow = cursor.getDay();
       if (dow === 0 || dow === 6) continue;
       days.push({
         iso: cursor.toISOString().slice(0, 10),
-        weekday: cursor.toLocaleDateString("en-GB", { weekday: "short" }),
+        weekday: cursor.toLocaleDateString(intlLocale, { weekday: "short" }),
         day: cursor.getDate(),
-        month: cursor.toLocaleDateString("en-GB", { month: "short" }),
+        month: cursor.toLocaleDateString(intlLocale, { month: "short" }),
       });
     }
     return days;
-  }, []);
+  }, [locale]);
 }
 
 export function BookingFlow() {
+  const { t, tList, locale } = useLanguage();
+  const STEPS = tList("forms.booking.steps");
+  const localizedServices = bookingServices.map((s) => localizeBookingService(s, locale));
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [booking, setBooking] = useState<Booking>({
@@ -58,7 +62,7 @@ export function BookingFlow() {
     company: "",
     notes: "",
   });
-  const days = useUpcomingDays();
+  const days = useUpcomingDays(locale);
 
   const set = (patch: Partial<Booking>) =>
     setBooking((b) => ({ ...b, ...patch }));
@@ -88,14 +92,14 @@ export function BookingFlow() {
           <Check className="size-7 text-fg-inverse" strokeWidth={2} />
         </span>
         <h2 className="type-title mt-8 !text-[clamp(1.6rem,3vw,2.6rem)]">
-          You&apos;re on the call sheet.
+          {t("forms.booking.doneTitle")}
         </h2>
         <p className="mt-4 max-w-md text-fg-muted">
           {prettyDate &&
-            `${prettyDate.weekday} ${prettyDate.day} ${prettyDate.month} at ${booking.slot} (CET) — `}
+            `${prettyDate.weekday} ${prettyDate.day} ${prettyDate.month} ${t("forms.booking.at")} ${booking.slot} (CET) — `}
           {booking.email
-            ? `a calendar invitation is on its way to ${booking.email}.`
-            : `we'll confirm the details by phone at ${booking.phone}.`}
+            ? `${t("forms.booking.doneBodyWithEmail")} ${booking.email}.`
+            : `${t("forms.booking.doneBodyWithPhone")} ${booking.phone}.`}
         </p>
       </motion.div>
     );
@@ -148,16 +152,16 @@ export function BookingFlow() {
             {step === 0 && (
               <fieldset className="min-w-0">
                 <legend className="type-statement">
-                  What should we talk about?
+                  {t("forms.booking.step0Legend")}
                 </legend>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  {bookingServices.map((s) => (
+                  {bookingServices.map((s, i) => (
                     <ChoicePill
                       key={s}
                       selected={booking.service === s}
                       onClick={() => set({ service: s })}
                     >
-                      {s}
+                      {localizedServices[i]}
                     </ChoicePill>
                   ))}
                 </div>
@@ -167,10 +171,10 @@ export function BookingFlow() {
             {step === 1 && (
               <fieldset className="min-w-0">
                 <legend className="type-statement">
-                  Roughly, the investment level?
+                  {t("forms.booking.step1Legend")}
                 </legend>
                 <p className="mt-3 text-sm text-fg-muted">
-                  This only helps us bring the right ideas — nothing is binding.
+                  {t("forms.booking.step1Hint")}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {bookingBudgets.map((b) => (
@@ -192,7 +196,7 @@ export function BookingFlow() {
               // strip's intrinsic width, so the scroller below never scrolls and
               // the whole card overflows the viewport instead.
               <fieldset className="min-w-0">
-                <legend className="type-statement">Pick your moment.</legend>
+                <legend className="type-statement">{t("forms.booking.step2Legend")}</legend>
                 <div className="mt-8 flex gap-3 overflow-x-auto pb-3">
                   {days.map((d) => (
                     <button
@@ -217,7 +221,7 @@ export function BookingFlow() {
                     </button>
                   ))}
                 </div>
-                <p className="type-eyebrow mt-8 text-fg-subtle">Time (CET)</p>
+                <p className="type-eyebrow mt-8 text-fg-subtle">{t("forms.booking.timeLabel")}</p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   {timeSlots.map((slot) => (
                     <ChoicePill
@@ -235,57 +239,57 @@ export function BookingFlow() {
 
             {step === 3 && (
               <fieldset className="min-w-0">
-                <legend className="type-statement">Who are we meeting?</legend>
+                <legend className="type-statement">{t("forms.booking.step3Legend")}</legend>
                 <div className="mt-8 grid gap-8 md:grid-cols-2">
-                  <Field label="Your name *" htmlFor="bk-name">
+                  <Field label={t("forms.name")} htmlFor="bk-name">
                     <TextInput
                       id="bk-name"
                       value={booking.name}
                       onChange={(e) => set({ name: e.target.value })}
-                      placeholder="Ava Lindgren"
+                      placeholder={t("forms.namePlaceholder")}
                       autoComplete="name"
                     />
                   </Field>
-                  <Field label="Email" htmlFor="bk-email">
+                  <Field label={t("forms.email")} htmlFor="bk-email">
                     <TextInput
                       id="bk-email"
                       type="email"
                       value={booking.email}
                       onChange={(e) => set({ email: e.target.value })}
-                      placeholder="ava@company.com"
+                      placeholder={t("forms.emailPlaceholderCompany")}
                       autoComplete="email"
                     />
                   </Field>
                   <Field
-                    label="Phone"
+                    label={t("forms.phone")}
                     htmlFor="bk-phone"
-                    hint="Email or phone — at least one is enough."
+                    hint={t("forms.phoneHint")}
                   >
                     <TextInput
                       id="bk-phone"
                       type="tel"
                       value={booking.phone}
                       onChange={(e) => set({ phone: e.target.value })}
-                      placeholder="+47 400 00 000"
+                      placeholder={t("forms.phonePlaceholder")}
                       autoComplete="tel"
                     />
                   </Field>
-                  <Field label="Company" htmlFor="bk-company" className="md:col-span-2">
+                  <Field label={t("forms.company")} htmlFor="bk-company" className="md:col-span-2">
                     <TextInput
                       id="bk-company"
                       value={booking.company}
                       onChange={(e) => set({ company: e.target.value })}
-                      placeholder="Company or brand"
+                      placeholder={t("forms.companyPlaceholder")}
                       autoComplete="organization"
                     />
                   </Field>
-                  <Field label="Anything we should watch before the call?" htmlFor="bk-notes" className="md:col-span-2">
+                  <Field label={t("forms.booking.notesLabel")} htmlFor="bk-notes" className="md:col-span-2">
                     <TextArea
                       id="bk-notes"
                       rows={3}
                       value={booking.notes}
                       onChange={(e) => set({ notes: e.target.value })}
-                      placeholder="Links, context, ambitions…"
+                      placeholder={t("forms.booking.notesPlaceholder")}
                     />
                   </Field>
                 </div>
@@ -294,19 +298,19 @@ export function BookingFlow() {
 
             {step === 4 && (
               <div>
-                <h2 className="type-statement">One last look.</h2>
+                <h2 className="type-statement">{t("forms.booking.step4Heading")}</h2>
                 <dl className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-2">
                   {[
-                    ["Discipline", booking.service],
-                    ["Budget", booking.budget],
+                    [t("forms.booking.discipline"), localizeBookingService(booking.service, locale)],
+                    [t("forms.booking.budget"), booking.budget],
                     [
-                      "When",
+                      t("forms.booking.when"),
                       prettyDate
                         ? `${prettyDate.weekday} ${prettyDate.day} ${prettyDate.month} · ${booking.slot} CET`
                         : "",
                     ],
-                    ["Who", `${booking.name}${booking.company ? ` — ${booking.company}` : ""}`],
-                    ["Reach you at", [booking.email, booking.phone].filter(Boolean).join(" · ")],
+                    [t("forms.booking.who"), `${booking.name}${booking.company ? ` — ${booking.company}` : ""}`],
+                    [t("forms.booking.reachAt"), [booking.email, booking.phone].filter(Boolean).join(" · ")],
                   ].map(([k, v]) => (
                     <div key={k} className="border-b border-line pb-4">
                       <dt className="type-eyebrow text-fg-subtle">{k}</dt>
@@ -331,7 +335,7 @@ export function BookingFlow() {
           )}
         >
           <ArrowLeft className="size-4" strokeWidth={1.75} />
-          Back
+          {t("forms.booking.back")}
         </button>
 
         <Magnetic strength={0.3}>
@@ -351,7 +355,7 @@ export function BookingFlow() {
               <span className="absolute inset-0 translate-y-full rounded-full bg-accent transition-transform duration-500 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)] group-hover:translate-y-0" />
             )}
             <span className="relative z-10">
-              {step === STEPS.length - 1 ? "Confirm booking" : "Continue"}
+              {step === STEPS.length - 1 ? t("forms.booking.confirmBooking") : t("forms.booking.continueLabel")}
             </span>
             {step === STEPS.length - 1 ? (
               <Calendar className="relative z-10 size-4" strokeWidth={1.75} />

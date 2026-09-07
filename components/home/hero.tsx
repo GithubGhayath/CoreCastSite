@@ -5,20 +5,21 @@ import dynamic from "next/dynamic";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useExperience } from "@/components/providers/experience";
 import { useTheme } from "@/components/providers/theme-provider";
+import { useLanguage } from "@/components/providers/language-provider";
 import { CtaButton } from "@/components/ui/button";
 
 const MonolithScene = dynamic(() => import("@/components/three/monolith"), {
   ssr: false,
 });
-// From the core of every story, we shape identity, define vision, and create lasting impact.
 const EASE = [0.65, 0.05, 0, 1] as const;
-const HEADLINE = ["From the core of every story,", "we shape identity,", "define vision,", "and create lasting"];
 
 export function Hero() {
   const { ready } = useExperience();
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const HEADLINE = [t("hero.line1"), t("hero.line2"), t("hero.line3"), t("hero.line4")];
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -50,7 +51,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       className="relative h-[165vh] text-fg"
-      aria-label="CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact."
+      aria-label={t("hero.ariaLabel")}
     >
       <div className="vignette sticky top-0 h-screen overflow-hidden bg-bg">
         {/* architectural void behind the monolith */}
@@ -90,9 +91,9 @@ export function Hero() {
           <div className="flex-1" />
 
           <div className="pointer-events-auto">
-            <h1 className="type-hero" aria-label="From the core of every story, we shape identity, define vision, and create lasting impact.">
+            <h1 className="type-hero" aria-label={t("hero.ariaLabel")}>
               {HEADLINE.map((line, i) => (
-                <span key={line} className="block overflow-hidden">
+                <span key={i} className="block overflow-hidden">
                   <motion.span
                     className="block will-change-transform"
                     style={{ x: lineShift[i], opacity: headlineOpacity }}
@@ -106,7 +107,7 @@ export function Hero() {
                       {i === 3 ? (
                         <>
                           <span className="type-serif-accent text-gradient-brand">
-                            impact
+                            {t("hero.accent")}
                           </span>
                           .
                         </>
@@ -127,14 +128,12 @@ export function Hero() {
               transition={{ duration: 1, ease: EASE, delay: 0.85 }}
             >
               <p className="max-w-md text-base leading-relaxed text-fg-muted">
-                CORECAST is a cinematic marketing agency. We transform
-                ambitious businesses into unforgettable brands through
-                strategy, film, photography and design.
+                {t("hero.paragraph")}
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <CtaButton href="/projects">View Our Work</CtaButton>
+                <CtaButton href="/projects">{t("common.viewOurWork")}</CtaButton>
                 <CtaButton href="/booking" variant="outline">
-                  Book a Strategy Call
+                  {t("common.bookAStrategyCall")}
                 </CtaButton>
               </div>
             </motion.div>
@@ -150,7 +149,7 @@ export function Hero() {
           transition={{ delay: 1.6, duration: 1 }}
           aria-hidden
         >
-          <span className="type-eyebrow text-fg-subtle">Scroll</span>
+          <span className="type-eyebrow text-fg-subtle">{t("hero.scroll")}</span>
           <div className="h-12 w-px overflow-hidden bg-line">
             <motion.div
               className="h-full w-full bg-accent"

@@ -7,12 +7,16 @@ import { bookingBudgets, bookingServices } from "@/lib/data";
 import { Field, TextArea, TextInput, SelectInput } from "@/components/ui/field";
 import { FadeUp } from "@/components/ui/reveal";
 import { Magnetic } from "@/components/ui/magnetic";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeBookingService } from "@/lib/i18n/localize";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
 export function ContactForm() {
+  const { t, locale } = useLanguage();
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const localizedServices = bookingServices.map((s) => localizeBookingService(s, locale));
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +24,7 @@ export function ContactForm() {
     const email = (data.get("email") as string)?.trim();
     const phone = (data.get("phone") as string)?.trim();
     if (!email && !phone) {
-      setError("Please add your email or phone so we can reply.");
+      setError(t("forms.contact.errorNoContact"));
       return;
     }
     setError("");
@@ -42,11 +46,10 @@ export function ContactForm() {
               <Check className="size-7 text-fg-inverse" strokeWidth={2} />
             </span>
             <h2 className="type-title mt-8 !text-[clamp(1.6rem,3vw,2.6rem)]">
-              Scene received.
+              {t("forms.contact.doneTitle")}
             </h2>
             <p className="mt-4 max-w-sm text-fg-muted">
-              Thank you — your message is with our producers. Expect a reply
-              within one business day.
+              {t("forms.contact.doneBody")}
             </p>
           </motion.div>
         ) : (
@@ -58,38 +61,38 @@ export function ContactForm() {
           >
             <FadeUp>
               <div className="grid gap-10 md:grid-cols-2">
-                <Field label="Your name *" htmlFor="name">
-                  <TextInput id="name" name="name" required placeholder="Ava Lindgren" autoComplete="name" />
+                <Field label={t("forms.name")} htmlFor="name">
+                  <TextInput id="name" name="name" required placeholder={t("forms.namePlaceholder")} autoComplete="name" />
                 </Field>
-                <Field label="Email" htmlFor="email">
-                  <TextInput id="email" name="email" type="email" placeholder="ava@company.com" autoComplete="email" />
+                <Field label={t("forms.email")} htmlFor="email">
+                  <TextInput id="email" name="email" type="email" placeholder={t("forms.emailPlaceholderCompany")} autoComplete="email" />
                 </Field>
                 <Field
-                  label="Phone"
+                  label={t("forms.phone")}
                   htmlFor="phone"
-                  hint="Email or phone — at least one is enough."
+                  hint={t("forms.phoneHint")}
                 >
-                  <TextInput id="phone" name="phone" type="tel" placeholder="+47 400 00 000" autoComplete="tel" />
+                  <TextInput id="phone" name="phone" type="tel" placeholder={t("forms.phonePlaceholder")} autoComplete="tel" />
                 </Field>
-                <Field label="Company" htmlFor="company">
-                  <TextInput id="company" name="company" placeholder="Company or brand" autoComplete="organization" />
+                <Field label={t("forms.company")} htmlFor="company">
+                  <TextInput id="company" name="company" placeholder={t("forms.companyPlaceholder")} autoComplete="organization" />
                 </Field>
-                <Field label="Interested in" htmlFor="service">
-                  <SelectInput id="service" name="service" options={bookingServices} defaultValue="" />
+                <Field label={t("forms.interestedIn")} htmlFor="service">
+                  <SelectInput id="service" name="service" options={localizedServices} defaultValue="" />
                 </Field>
-                <Field label="Budget range" htmlFor="budget">
+                <Field label={t("forms.budgetRange")} htmlFor="budget">
                   <SelectInput id="budget" name="budget" options={bookingBudgets} defaultValue="" />
                 </Field>
-                <Field label="Where did you find us?" htmlFor="source">
-                  <TextInput id="source" name="source" placeholder="Instagram, referral, awards…" />
+                <Field label={t("forms.whereFindUs")} htmlFor="source">
+                  <TextInput id="source" name="source" placeholder={t("forms.whereFindUsPlaceholder")} />
                 </Field>
               </div>
-              <Field label="Your story so far *" htmlFor="message" className="mt-10">
+              <Field label={t("forms.contact.storyLabel")} htmlFor="message" className="mt-10">
                 <TextArea
                   id="message"
                   name="message"
                   required
-                  placeholder="What are you building, and what should people remember about it?"
+                  placeholder={t("forms.contact.storyPlaceholder")}
                 />
               </Field>
               {error && (
@@ -104,7 +107,7 @@ export function ContactForm() {
                     className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-bg-inverse px-9 py-4 text-sm font-semibold text-fg-inverse"
                   >
                     <span className="absolute inset-0 translate-y-full rounded-full bg-accent transition-transform duration-500 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)] group-hover:translate-y-0" />
-                    <span className="relative z-10">Send the brief</span>
+                    <span className="relative z-10">{t("forms.contact.submit")}</span>
                     <ArrowUpRight className="relative z-10 size-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
                   </button>
                 </Magnetic>

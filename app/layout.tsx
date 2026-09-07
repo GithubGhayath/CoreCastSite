@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Instrument_Serif, Manrope } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { LanguageProvider } from "@/components/providers/language-provider";
 import { Experience } from "@/components/providers/experience";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -80,6 +81,16 @@ try {
 } catch (e) {}
 `;
 
+const langInit = `
+try {
+  var l = localStorage.getItem("corecast-lang");
+  if (l === "en") {
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+  }
+} catch (e) {}
+`;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -102,13 +113,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
+      lang="ar"
+      dir="rtl"
       data-theme="dark"
       className={` ${almarai.variable} ${mozillaText.variable}`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <script dangerouslySetInnerHTML={{ __html: langInit }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -116,13 +129,15 @@ export default function RootLayout({
       </head>
       <body className="grain">
         <ThemeProvider>
-          <Experience>
-            <ScrollProgress />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-             <BackToTop />
-          </Experience>
+          <LanguageProvider>
+            <Experience>
+              <ScrollProgress />
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <BackToTop />
+            </Experience>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
