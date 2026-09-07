@@ -12,7 +12,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
-import { LanguageToggle } from "../ui/LanguageToggle";
+// import { LanguageToggle } from "../ui/LanguageToggle";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
@@ -73,7 +73,7 @@ export function Header() {
         className={cn(
           "fixed inset-x-0 top-0 z-[120] text-fg transition-all duration-700 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)]",
           scrolled && !open && "backdrop-blur-md",
-          hiddenInHero && "pointer-events-none -translate-y-full opacity-0"
+          hiddenInHero && "pointer-events-none -translate-y-full opacity-0",
         )}
         style={{
           backgroundColor: scrolled && !open ? "var(--scrim)" : "transparent",
@@ -120,13 +120,13 @@ export function Header() {
                 <span
                   className={cn(
                     "h-px w-4 bg-current transition-transform duration-500 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)]",
-                    open && "translate-y-1 rotate-45"
+                    open && "translate-y-1 rotate-45",
                   )}
                 />
                 <span
                   className={cn(
                     "h-px w-4 bg-current transition-transform duration-500 [transition-timing-function:cubic-bezier(0.65,0.05,0,1)]",
-                    open && "-translate-y-1 -rotate-45"
+                    open && "-translate-y-1 -rotate-45",
                   )}
                 />
               </button>
@@ -151,8 +151,15 @@ export function Header() {
                   <motion.div
                     initial={{ y: "110%" }}
                     animate={{ y: "0%" }}
-                    exit={{ y: "110%", transition: { duration: 0.4, ease: EASE } }}
-                    transition={{ duration: 0.8, ease: EASE, delay: 0.15 + i * 0.06 }}
+                    exit={{
+                      y: "110%",
+                      transition: { duration: 0.4, ease: EASE },
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      ease: EASE,
+                      delay: 0.15 + i * 0.06,
+                    }}
                   >
                     <Link
                       href={link.href}
@@ -166,7 +173,7 @@ export function Header() {
                           "type-title transition-colors duration-500",
                           pathname === link.href
                             ? "text-gradient-pink"
-                            : "text-fg group-hover:text-gradient-pink"
+                            : "text-fg group-hover:text-gradient-pink",
                         )}
                       >
                         {t(navKeyByHref[link.href] ?? link.label)}
@@ -185,7 +192,9 @@ export function Header() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.55 }}
             >
               <div>
-                <p className="type-eyebrow text-fg-subtle">{t("nav.newBusiness")}</p>
+                <p className="type-eyebrow text-fg-subtle">
+                  {t("nav.newBusiness")}
+                </p>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="link-line mt-2 inline-block text-lg font-medium"
