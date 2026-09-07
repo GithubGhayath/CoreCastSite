@@ -7,11 +7,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { projects, projectCategories, type ProjectCategory } from "@/lib/data";
 import { ProjectPoster } from "@/components/ui/project-poster";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeCategory, localizeProject } from "@/lib/i18n/localize";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 type Filter = ProjectCategory | "All";
 
 export function ProjectsGrid() {
+  const { t, locale } = useLanguage();
   const params = useSearchParams();
   const initial = params.get("category");
   const [filter, setFilter] = useState<Filter>(
@@ -21,8 +24,11 @@ export function ProjectsGrid() {
   );
 
   const visible = useMemo(
-    () => projects.filter((p) => filter === "All" || p.category === filter),
-    [filter]
+    () =>
+      projects
+        .filter((p) => filter === "All" || p.category === filter)
+        .map((p) => localizeProject(p, locale)),
+    [filter, locale]
   );
 
   return (
@@ -40,7 +46,7 @@ export function ProjectsGrid() {
                 : "border-line text-fg-muted hover:border-line-strong hover:text-fg"
             )}
           >
-            {cat}
+            {cat === "All" ? t("common.all") : localizeCategory(cat, locale)}
             <span className="ml-2 opacity-60">
               {cat === "All"
                 ? projects.length
@@ -64,7 +70,7 @@ export function ProjectsGrid() {
             >
               <Link
                 href={`/projects/${project.slug}`}
-                data-cursor-label="View"
+                data-cursor-label={t("common.view")}
                 className="group block h-full w-full"
               >
                 <ProjectPoster project={project} />

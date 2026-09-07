@@ -8,6 +8,8 @@ import { reviews } from "@/lib/data";
 import { Magnetic } from "@/components/ui/magnetic";
 import { FadeUp } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeReview } from "@/lib/i18n/localize";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
 
@@ -17,6 +19,7 @@ export function ReviewsSection({
 }: {
   standalone?: boolean;
 }) {
+  const { t, locale } = useLanguage();
   const [[index, direction], setIndex] = useState<[number, number]>([0, 1]);
 
   const paginate = useCallback((dir: number) => {
@@ -28,7 +31,7 @@ export function ReviewsSection({
     return () => clearInterval(id);
   }, [paginate, index]);
 
-  const review = reviews[index];
+  const review = localizeReview(reviews[index], locale);
 
   return (
     <section
@@ -52,7 +55,7 @@ export function ReviewsSection({
             <span className="type-eyebrow text-accent">04</span>
             <span className="h-px w-12 bg-line-strong" />
             <span className="type-eyebrow text-fg-muted">
-              What clients say
+              {t("home.reviews.whatClientsSay")}
             </span>
           </div>
         </FadeUp>
@@ -88,7 +91,7 @@ export function ReviewsSection({
                   href={`/projects/${review.project}`}
                   className="link-line type-eyebrow !tracking-[0.18em] text-accent"
                 >
-                  See the project
+                  {t("home.reviews.seeProject")}
                 </Link>
               </footer>
             </motion.blockquote>
@@ -101,7 +104,7 @@ export function ReviewsSection({
               <button
                 key={i}
                 onClick={() => setIndex([i, i > index ? 1 : -1])}
-                aria-label={`Go to review ${i + 1}`}
+                aria-label={`${t("home.reviews.goToReview")} ${i + 1}`}
                 className={cn(
                   "h-px transition-all duration-500",
                   i === index ? "w-10 bg-accent" : "w-5 bg-line-strong hover:bg-fg-muted"
@@ -113,7 +116,7 @@ export function ReviewsSection({
             <Magnetic strength={0.4}>
               <button
                 onClick={() => paginate(-1)}
-                aria-label="Previous review"
+                aria-label={t("home.reviews.prevReview")}
                 className="flex size-12 items-center justify-center rounded-full border border-line transition-colors duration-500 hover:border-accent"
               >
                 <ArrowLeft className="size-4" strokeWidth={1.5} />
@@ -122,7 +125,7 @@ export function ReviewsSection({
             <Magnetic strength={0.4}>
               <button
                 onClick={() => paginate(1)}
-                aria-label="Next review"
+                aria-label={t("home.reviews.nextReview")}
                 className="flex size-12 items-center justify-center rounded-full border border-line transition-colors duration-500 hover:border-accent"
               >
                 <ArrowRight className="size-4" strokeWidth={1.5} />
@@ -137,7 +140,7 @@ export function ReviewsSection({
               href="/reviews"
               className="link-line type-eyebrow !tracking-[0.2em] text-fg-muted"
             >
-              All reviews
+              {t("common.allReviews")}
             </Link>
           </FadeUp>
         )}

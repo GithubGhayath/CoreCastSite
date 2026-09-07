@@ -5,14 +5,17 @@ import { Marquee } from "@/components/ui/marquee";
 import { FadeUp } from "@/components/ui/reveal";
 import ClientDialog from "@/components/ui/ClientDialog";
 import { useState } from "react";
-import Image from "next/image"; 
+import Image from "next/image";
+import { useLanguage } from "@/components/providers/language-provider";
+import { localizeClient } from "@/lib/i18n/localize";
 
 
 export function TrustedBy() {
+const { t, locale } = useLanguage();
 const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [paused, setPaused] = useState(false);
   const ShowDialog = (client: Client) => {
-        setSelectedClient(client);
+        setSelectedClient(localizeClient(client, locale));
   };
 
 
@@ -20,7 +23,7 @@ const [selectedClient, setSelectedClient] = useState<Client | null>(null);
     <section className="border-b border-line py-16 md:py-24" aria-label="Trusted by">
       <FadeUp>
         <p className="type-eyebrow px-6 text-center text-fg-subtle md:px-12">
-          Trusted by ambitious brands worldwide
+          {t("home.trustedBy")}
         </p>
       </FadeUp>
       <FadeUp delay={0.15}>

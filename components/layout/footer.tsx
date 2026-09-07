@@ -7,15 +7,28 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { FadeUp } from "@/components/ui/reveal";
 import { LogoWordmark } from "@/components/ui/logo";
 import ContactInfo from "@/components/providers/ContactInfo";
+import { useLanguage } from "@/components/providers/language-provider";
+
+const navKeyByHref: Record<string, string> = {
+  "/": "nav.home",
+  "/about": "nav.about",
+  "/services": "nav.services",
+  "/projects": "nav.projects",
+  "/reviews": "nav.reviews",
+  "/careers": "nav.careers",
+  "/contact": "nav.contact",
+};
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="relative overflow-hidden border-t border-line">
       <div className="px-6 pb-10 pt-20 md:px-12 md:pt-28">
         <FadeUp>
           <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_auto]">
             <div>
-              <p className="type-eyebrow text-fg-subtle">New business</p>
+              <p className="type-eyebrow text-fg-subtle">{t("nav.newBusiness")}</p>
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="link-line type-statement mt-3 inline-block"
@@ -26,7 +39,7 @@ export function Footer() {
             </div>
 
             <nav aria-label="Footer">
-              <p className="type-eyebrow text-fg-subtle">Menu</p>
+              <p className="type-eyebrow text-fg-subtle">{t("nav.menu")}</p>
               <ul className="mt-4 space-y-2">
                 {navLinks.map((l) => (
                   <li key={l.href}>
@@ -34,7 +47,7 @@ export function Footer() {
                       href={l.href}
                       className="link-line text-sm font-medium text-fg-muted transition-colors hover:text-fg"
                     >
-                      {l.label}
+                      {t(navKeyByHref[l.href] ?? l.label)}
                     </Link>
                   </li>
                 ))}
@@ -43,14 +56,14 @@ export function Footer() {
                     href="/booking"
                     className="link-line text-sm font-medium text-fg-muted transition-colors hover:text-fg"
                   >
-                    Booking
+                    {t("nav.booking")}
                   </Link>
                 </li>
               </ul>
             </nav>
 
             <div>
-              <p className="type-eyebrow text-fg-subtle">Follow</p>
+              <p className="type-eyebrow text-fg-subtle">{t("nav.follow")}</p>
               <ul className="mt-4 space-y-2">
                 {siteConfig.socials.map((s) => (
                   <li key={s.label}>
@@ -78,8 +91,8 @@ export function Footer() {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-xs text-fg-subtle">
-          <p>© {new Date().getFullYear()} CORECAST. All rights reserved.</p>
-          <p>We build brands that people remember.</p>
+          <p>© {new Date().getFullYear()} CORECAST. {t("footer.rights")}</p>
+          <p>{t("footer.tagline")}</p>
         </div>
       </div>
     </footer>

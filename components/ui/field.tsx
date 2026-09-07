@@ -1,5 +1,8 @@
+"use client";
+
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
 
 const inputBase =
   "w-full border-b border-line bg-transparent py-4 text-base outline-none transition-colors duration-500 placeholder:text-fg-subtle focus:border-accent";
@@ -48,10 +51,11 @@ export function SelectInput({
 }: React.SelectHTMLAttributes<HTMLSelectElement> & {
   options: readonly string[];
 }) {
+  const { t } = useLanguage();
   return (
     <select {...props} className={cn(inputBase, "appearance-none", props.className)}>
       <option value="" disabled>
-        Select…
+        {t("common.selectPlaceholder")}
       </option>
       {options.map((o) => (
         <option key={o} value={o} className="bg-bg-elevated text-fg">

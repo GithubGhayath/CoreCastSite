@@ -6,12 +6,24 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks, siteConfig } from "@/lib/data";
 import { useTheme } from "@/components/providers/theme-provider";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Magnetic } from "@/components/ui/magnetic";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.65, 0.05, 0, 1] as const;
+
+const navKeyByHref: Record<string, string> = {
+  "/": "nav.home",
+  "/about": "nav.about",
+  "/services": "nav.services",
+  "/projects": "nav.projects",
+  "/reviews": "nav.reviews",
+  "/careers": "nav.careers",
+  "/contact": "nav.contact",
+};
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -19,6 +31,7 @@ export function Header() {
   const [pastHero, setPastHero] = useState(false);
   const pathname = usePathname();
   const { theme } = useTheme();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => {
@@ -91,14 +104,15 @@ export function Header() {
                 href="/booking"
                 className="link-line type-eyebrow hidden !tracking-[0.2em] md:inline-block"
               >
-                Book a call
+                {t("nav.bookACall")}
               </Link>
             </Magnetic>
+            <LanguageToggle />
             <ThemeToggle />
             <Magnetic strength={0.4}>
               <button
                 onClick={() => setOpen((v) => !v)}
-                aria-label={open ? "Close menu" : "Open menu"}
+                aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
                 aria-expanded={open}
                 className="group flex size-10 flex-col items-center justify-center gap-[7px] rounded-full border border-line transition-colors duration-500 hover:border-line-strong"
               >
@@ -154,7 +168,7 @@ export function Header() {
                             : "text-fg group-hover:text-gradient-pink"
                         )}
                       >
-                        {link.label}
+                        {t(navKeyByHref[link.href] ?? link.label)}
                       </span>
                     </Link>
                   </motion.div>
@@ -170,7 +184,7 @@ export function Header() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.55 }}
             >
               <div>
-                <p className="type-eyebrow text-fg-subtle">New business</p>
+                <p className="type-eyebrow text-fg-subtle">{t("nav.newBusiness")}</p>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="link-line mt-2 inline-block text-lg font-medium"
