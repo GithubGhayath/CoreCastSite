@@ -2,7 +2,14 @@
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Center, Environment, Float, Lightformer, Resize, useGLTF } from "@react-three/drei";
+import {
+  Center,
+  Environment,
+  Float,
+  Lightformer,
+  Resize,
+  useGLTF,
+} from "@react-three/drei";
 import * as THREE from "three";
 import type { MotionValue } from "framer-motion";
 
@@ -13,7 +20,7 @@ import type { MotionValue } from "framer-motion";
  * Stands in for (and layers under) the Seedance hero clip.
  */
 
-const LOGO_URL = "/CoreCastSite/corecast-logo.glb";
+const LOGO_URL = "/corecast-logo.glb";
 
 /**
  * The logo GLB ships as an extruded SVG with a flat black material, which
@@ -34,7 +41,7 @@ function LogoModel() {
         clearcoat: 1,
         clearcoatRoughness: 0.25,
       }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -83,7 +90,8 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
       glow.current.parent?.worldToLocal(glowLocal.current);
       glow.current.position.lerp(glowLocal.current, 0.18);
       const targetIntensity = hovered ? 110 : 0;
-      glow.current.intensity += (targetIntensity - glow.current.intensity) * 0.12;
+      glow.current.intensity +=
+        (targetIntensity - glow.current.intensity) * 0.12;
     }
 
     if (group.current) {
@@ -136,7 +144,13 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
         distance={25}
       />
       {/* hover glow — tracks the pointer, fades in only while over the form */}
-      <pointLight ref={glow} color="#e663a5" intensity={0} distance={9} decay={2} />
+      <pointLight
+        ref={glow}
+        color="#e663a5"
+        intensity={0}
+        distance={9}
+        decay={2}
+      />
 
       <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.35}>
         <group
@@ -156,7 +170,6 @@ function MonolithForm({ progress }: { progress: MotionValue<number> }) {
             <LogoModel />
           </Suspense>
           {/* orbiting shards */}
-
         </group>
       </Float>
     </>
