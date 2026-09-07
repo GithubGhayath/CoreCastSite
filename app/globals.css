@@ -157,15 +157,6 @@ body {
   color: var(--selection-fg);
 }
 
-/* Custom cursor active state — hide native cursor on fine pointers */
-@media (pointer: fine) {
-  body[data-custom-cursor="true"],
-  body[data-custom-cursor="true"] a,
-  body[data-custom-cursor="true"] button {
-    cursor: none;
-  }
-}
-
 /* ============================================
    EDITORIAL TYPE SCALE
    ============================================ */
@@ -193,6 +184,17 @@ body {
   line-height: 0.96;
   letter-spacing: 0.01em;
   text-transform: uppercase;
+}
+
+/* The 0.92–0.96 line-heights above were tuned for Anton's tight Latin
+   metrics. Almarai's Arabic glyphs need more vertical room at the same
+   line-height, so stacked MaskLines/SectionHeading lines visually
+   collide in Arabic (letters from adjacent lines overlapping). Loosen
+   line-height for RTL only — English keeps the original tight values. */
+:root[dir="rtl"] .type-hero,
+:root[dir="rtl"] .type-display,
+:root[dir="rtl"] .type-title {
+  line-height: 1.25;
 }
 
 .type-statement {

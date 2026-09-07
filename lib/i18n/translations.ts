@@ -53,11 +53,9 @@ export const translations: { en: Dict; ar: Dict } = {
     },
     hero: {
       ariaLabel:
-        "CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact.",
-      line1: "From the core of every story,",
-      line2: "we shape identity,",
-      line3: "define vision,",
-      line4: "and create lasting",
+        "CORECAST — From the essence of every story, we create identity, vision, and impact.",
+      line1: "From the essence of every story",
+      line2Prefix: "we create identity, vision, and",
       accent: "impact",
       paragraph:
         "CORECAST is a cinematic marketing agency. We transform ambitious businesses into unforgettable brands through strategy, film, photography and design.",
@@ -107,7 +105,7 @@ export const translations: { en: Dict; ar: Dict } = {
         line2Prefix: "BRANDS LIKE",
         accent: "films",
         intro:
-          "Founded by a film director and a strategist, CORECAST exists because most marketing is made to be skipped — and we refuse to make anything skippable.",
+          "CORECAST was founded by Syrian entrepreneur Ibrahim Omar Al Tayeb, who put the extensive marketing experience he gained at Omar Al Tayeb Holding Group in service of its clients, supported by a team with deep expertise across a wide range of fields.",
         manifestoEyebrow: "The manifesto",
         valuesEyebrow: "What we refuse to compromise",
         valuesLine1: "Four rules",
@@ -311,12 +309,10 @@ export const translations: { en: Dict; ar: Dict } = {
     },
     hero: {
       ariaLabel:
-        "كوركاست — من قلب كل قصة، نصوغ الهوية، ونرسم الرؤية، ونصنع أثرًا يدوم.",
-      line1: "من قلب كل قصة،",
-      line2: "نصوغ الهوية،",
-      line3: "نرسم الرؤية،",
-      line4: "ونصنع أثرًا",
-      accent: "خالدًا",
+        "كوركاست — من جوهر كل رواية، نصنع الهوية والرؤية والأثر.",
+      line1: "من جـوهـر كــل روايــة",
+      line2Prefix: "نصنع الهـويـة و الرؤيـة و",
+      accent: "الاثـر",
       paragraph:
         "كوركاست وكالة تسويق سينمائية. نحوّل الأعمال الطموحة إلى علامات تجارية لا تُنسى عبر الاستراتيجية والأفلام والتصوير والتصميم.",
       scroll: "مرر للأسفل",
@@ -361,11 +357,11 @@ export const translations: { en: Dict; ar: Dict } = {
     pages: {
       about: {
         eyebrow: "عن كوركاست",
-        line1: "ندير",
-        line2Prefix: "العلامات كما ندير",
-        accent: "الأفلام",
+        line1: "رؤية ريادية،",
+        line2Prefix: "وفريق واسع",
+        accent: "الخبرة",
         intro:
-          "تأسست كوركاست على يد مخرج سينمائي واستراتيجي، لأن معظم التسويق يُصنع ليُتخطّى — ونحن نرفض أن نصنع أي شيء يمكن تخطّيه.",
+          "أسّس رائد الأعمال السوري إبراهيم عمر الطيب شركة كوركاست، ليضع خبرته التسويقية الواسعة التي اكتسبها من مجموعة عمر الطيب القابضة في خدمة عملائها، مستعينًا بفريق يمتلك خبرة عميقة تمتد عبر مختلف المجالات.",
         manifestoEyebrow: "بياننا",
         valuesEyebrow: "ما لا نساوم عليه",
         valuesLine1: "أربع قواعد",

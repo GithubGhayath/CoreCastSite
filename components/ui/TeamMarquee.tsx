@@ -21,7 +21,7 @@ export default function TeamMarquee({ team }: Props) {
   return (
     // overflow-hidden is load-bearing: the track is ~5900px wide, and without
     // it the cards escape their column and are only masked by body's overflow-x.
-    <div className="w-full overflow-hidden py-10">
+    <div dir="ltr" className="w-full overflow-hidden py-10">
       <motion.div
         className="flex w-max flex-row gap-8"
         animate={{
