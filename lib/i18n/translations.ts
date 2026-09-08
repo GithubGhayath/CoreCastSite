@@ -88,7 +88,7 @@ export const translations: { en: Dict; ar: Dict } = {
         nextReview: "Next review",
         goToReview: "Go to review",
       },
-      trustedBy: "Trusted by ambitious brands worldwide",
+      trustedBy: "Trusted by ambitious brands",
       contactCta: {
         eyebrow: "Your story starts here",
         line1: "LET'S MAKE",
@@ -344,7 +344,7 @@ export const translations: { en: Dict; ar: Dict } = {
         nextReview: "الرأي التالي",
         goToReview: "الانتقال إلى الرأي",
       },
-      trustedBy: "موثوق به من علامات تجارية طموحة حول العالم",
+      trustedBy: "موثوق به من علامات تجارية طموحة",
       contactCta: {
         eyebrow: "قصتك تبدأ من هنا",
         line1: "لنصنع",
@@ -452,7 +452,7 @@ export const translations: { en: Dict; ar: Dict } = {
     },
     forms: {
       name: "الاسم *",
-      namePlaceholder: "آفا ليندغرين",
+      namePlaceholder: "غيث العلي",
       email: "البريد الإلكتروني",
       emailPlaceholderCompany: "ava@company.com",
       emailPlaceholderStudio: "ava@studio.com",

@@ -22,8 +22,10 @@ export default function TeamMemberCard({
       className="
       group
       relative
-      h-[540px]
-      w-[min(85vw,460px)]
+      h-[440px]
+      w-[min(72vw,300px)]
+      md:h-[540px]
+      md:w-[min(85vw,460px)]
       shrink-0
       overflow-hidden
       rounded-[28px]

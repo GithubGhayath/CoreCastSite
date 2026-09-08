@@ -221,6 +221,18 @@ body {
   letter-spacing: 0;
 }
 
+/* Almarai has no real italic face, so English's synthetic-italic-free
+   accent (Instrument Serif has a true italic) is unaffected, but
+   Arabic gets a browser-faked skew — and that skew is what slices a
+   sliver off the first (rightmost) letter of every gradient-clipped
+   accent word ("الأثر", "الخبرة", "لا يُنسى" …): the gradient's
+   background-clip mask and the synthetically-slanted glyph outline
+   don't line up perfectly at the edge. Turning the fake slant off for
+   RTL removes the mismatch at its source instead of papering over it. */
+:root[dir="rtl"] .type-serif-accent {
+  font-style: normal;
+}
+
 /* ============================================
    CINEMATIC SURFACES
    ============================================ */
@@ -305,6 +317,22 @@ body {
   overflow: hidden;
 }
 
+/* Arabic display type occasionally paints glyph ink slightly past its
+   calculated line box (heavier weights, tatweel joins, and — most
+   visibly — the accent style's synthetic italic, since Almarai has no
+   true italic face and the browser skews it). RTL text sits flush
+   against these reveal masks with no buffer, so that overshoot gets
+   clipped. Extend the clip box a hair on both edges via a negative
+   margin, then pad the content back in by the same amount so nothing
+   visibly shifts — English keeps its unmodified italic face and is
+   untouched by this RTL-only rule. */
+:root[dir="rtl"] .line-mask,
+:root[dir="rtl"] .type-hero > span.block.overflow-hidden,
+:root[dir="rtl"] nav[aria-label="Main navigation"] li {
+  margin-inline: -0.3em;
+  padding-inline: 0.3em;
+}
+
 /* Brand gradient helpers — registered as utilities so the Tailwind v4
    compiler emits them (plain classes in the bg- and text- namespaces
    get shadowed by the utility engine) */
@@ -331,6 +359,35 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* These gradients paint left-to-right in absolute physical terms, so
+   the dark, low-contrast violet end always lands wherever text
+   *starts* in LTR (the left). In RTL, text starts on the right
+   instead — so that same dark end now lands on the very first
+   (rightmost) letter of every colored word, against the dark theme's
+   near-black background, making it look faded/half-missing. Mirror
+   the angle for RTL only, so the bright pink/peach end lands on the
+   first letter again, exactly as it does in English — no colors,
+   stops, or English rendering are changed. */
+:root[dir="rtl"] .text-gradient-brand {
+  background-image: linear-gradient(
+    268deg,
+    var(--brand-peach) 0%,
+    var(--brand-magenta) 38%,
+    var(--brand-purple) 72%,
+    var(--brand-violet) 100%
+  );
+}
+
+:root[dir="rtl"] .text-gradient-pink {
+  background-image: linear-gradient(
+    268deg,
+    var(--brand-pink) 0%,
+    var(--brand-magenta) 32%,
+    var(--brand-purple) 72%,
+    var(--brand-violet) 100%
+  );
 }
 
 /* Hairline link underline */
