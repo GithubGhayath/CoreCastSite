@@ -20,7 +20,7 @@ export function Stats() {
           <FadeUp
             key={stat.label}
             delay={i * 0.08}
-            className="border-line p-8 [&:nth-child(odd)]:border-r md:p-14 lg:[&:not(:last-child)]:border-r"
+            className="border-line p-8 [&:nth-child(odd)]:border-e md:p-14 lg:[&:not(:last-child)]:border-e"
           >
             <div className="type-display text-gradient-pink">
               <Counter value={stat.value} suffix={stat.suffix} />

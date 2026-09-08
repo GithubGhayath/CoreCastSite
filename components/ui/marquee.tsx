@@ -14,7 +14,7 @@ export function Marquee({
   paused?: boolean;
 }) {
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <div dir="ltr" className={cn("overflow-hidden", className)}>
       <div
         className={cn(
           "animate-marquee flex w-max items-center",

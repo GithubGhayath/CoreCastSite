@@ -12,9 +12,9 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { localizeValue, localizeTeamMember } from "@/lib/i18n/localize";
 
 const MANIFESTO_EN =
-  "Attention is the world's most valuable currency—and earning it is only the beginning. We don't chase clicks or impressions; we create experiences that people remember. Every identity we build, every frame we compose, and every campaign we launch is crafted with intention, precision, and purpose. Nothing is random. Nothing is unnecessary. Every detail exists to leave a lasting impression and turn brands into stories people never forget.";
+  "Nothing in our process is left to chance. Every identity we design, every scene we shoot, and every campaign we launch begins with a clear idea, executed with deliberate precision — where creativity meets technical craft. We treat every project as a story worth telling carefully, turning ideas into visual experiences that mean something, and giving each brand a presence that reflects who they truly are. Because it's the small details, handled with intent, that separate a forgettable brand from one that stays in memory.";
 const MANIFESTO_AR =
-  "الانتباه هو العملة الأكثر قيمة في العالم — وكسبه ليس سوى البداية. نحن لا نطارد النقرات أو مرات الظهور؛ بل نصنع تجارب يتذكرها الناس. كل هوية نبنيها، وكل لقطة نُركّبها، وكل حملة نطلقها، تُصنع بقصد ودقة وهدف. لا شيء عشوائي. لا شيء زائد عن الحاجة. كل تفصيل موجود ليترك أثرًا يدوم ويحوّل العلامات التجارية إلى قصص لا ينساها الناس أبدًا.";
+  "لا شيء في عملنا يُترك للمصادفة. كل هوية بصرية نصممها، وكل مشهد نصوّره، وكل حملة نطلقها يبدأ من فكرة واضحة ويُنفَّذ بدقة متعمّدة تمزج بين الإبداع والحرفية التقنية. نتعامل مع كل مشروع بوصفه قصة تستحق أن تُروى بعناية، فنحوّل الأفكار إلى تجارب بصرية ذات معنى، ونمنح كل علامة حضورًا يعكس هويتها الحقيقية. فالتفاصيل الصغيرة، حين تُدار بقصد، هي ما يصنع الفرق بين علامة تجارية عابرة وأخرى تبقى في الذاكرة.";
 
 export function AboutPageClient({
   team,
@@ -53,7 +53,7 @@ export function AboutPageClient({
           <div className="md:col-span-9">
             <WordReveal
               className="type-statement"
-              accentWords={locale === "ar" ? ["عشوائي", "الظهور", "ينساها"] : ["Nothing", "impressions", "forget"]}
+              accentWords={locale === "ar" ? ["الإبداع", "قصة", "الذاكرة"] : ["creativity", "story", "memory"]}
               text={locale === "ar" ? MANIFESTO_AR : MANIFESTO_EN}
             />
           </div>
