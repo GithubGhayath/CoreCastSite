@@ -14,7 +14,6 @@ export const navLinks = [
 
 /* ============ CLIENTS ============ */
 
-
 export interface Client {
   name: string;
   description: string;
@@ -27,51 +26,35 @@ export const clients: Client[] = [
     name: "NORDMARK",
     description:
       "A Scandinavian architecture studio specializing in sustainable residential and commercial spaces.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
-    contactInfo: [
-      "info@nordmark.com",
-      "+46 123 456 789",
-      "Stockholm, Sweden",
-    ],
+    Logo: "/Images/TrustedBy/Alfoad.png",
+    contactInfo: ["info@nordmark.com", "+46 123 456 789", "Stockholm, Sweden"],
   },
   {
     name: "Atelier Une",
     description:
       "Creative design agency delivering premium branding and digital experiences for luxury brands.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2026_logo.svg",
-    contactInfo: [
-      "hello@atelierune.fr",
-      "+33 1 42 55 81 24",
-      "Paris, France",
-    ],
+    Logo: "/Images/TrustedBy/Alnouzha.png",
+    contactInfo: ["hello@atelierune.fr", "+33 1 42 55 81 24", "Paris, France"],
   },
   {
     name: "HALVORSEN",
     description:
       "Industrial engineering company focused on precision manufacturing and automation.",
-   Logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
-    contactInfo: [
-      "contact@halvorsen.no",
-      "+47 22 45 98 11",
-      "Oslo, Norway",
-    ],
+    Logo: "/Images/TrustedBy/Alomran.png",
+    contactInfo: ["contact@halvorsen.no", "+47 22 45 98 11", "Oslo, Norway"],
   },
   {
     name: "Kessler & Co",
     description:
       "Business consulting firm helping enterprises optimize strategy and digital transformation.",
-   Logo: "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg",
-    contactInfo: [
-      "office@kesslerco.com",
-      "+49 30 555 1234",
-      "Berlin, Germany",
-    ],
+    Logo: "/Images/TrustedBy/Alsaheal.png",
+    contactInfo: ["office@kesslerco.com", "+49 30 555 1234", "Berlin, Germany"],
   },
   {
     name: "MERIDIAN",
     description:
       "International logistics company providing smart freight and supply chain solutions.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+    Logo: "/Images/TrustedBy/AlteabSmart.png",
     contactInfo: [
       "support@meridianlogistics.com",
       "+44 20 7123 4567",
@@ -82,29 +65,21 @@ export const clients: Client[] = [
     name: "Volt Athletics",
     description:
       "Sports performance company building personalized training experiences for athletes.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
-    contactInfo: [
-      "hello@voltathletics.com",
-      "+1 206 555 0123",
-      "Seattle, USA",
-    ],
+    Logo: "/Images/TrustedBy/Arabica.png",
+    contactInfo: ["hello@voltathletics.com", "+1 206 555 0123", "Seattle, USA"],
   },
   {
     name: "CASA LUMEN",
     description:
       "Interior design studio creating elegant living spaces with timeless aesthetics.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Instagram.svg",
-    contactInfo: [
-      "info@casalumen.it",
-      "+39 06 555 8899",
-      "Rome, Italy",
-    ],
+    Logo: "/Images/TrustedBy/Ashtar.png",
+    contactInfo: ["info@casalumen.it", "+39 06 555 8899", "Rome, Italy"],
   },
   {
     name: "Øst Hotel",
     description:
       "Boutique hospitality brand delivering premium guest experiences across Northern Europe.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    Logo: "/Images/TrustedBy/Asset8logoideas.png",
     contactInfo: [
       "stay@osthotel.com",
       "+45 33 88 45 11",
@@ -115,7 +90,7 @@ export const clients: Client[] = [
     name: "PRISMWEAR",
     description:
       "Modern fashion label blending sustainability with contemporary streetwear.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+    Logo: "/Images/TrustedBy/Brilant.png",
     contactInfo: [
       "support@prismwear.com",
       "+1 415 555 8877",
@@ -126,34 +101,57 @@ export const clients: Client[] = [
     name: "Ferro Coffee",
     description:
       "Specialty coffee roaster sourcing premium beans from farms around the world.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Adobe_Inc._logo.svg",
-    contactInfo: [
-      "coffee@ferro.com",
-      "+61 2 8123 5566",
-      "Sydney, Australia",
-    ],
+    Logo: "/Images/TrustedBy/embs.png",
+    contactInfo: ["coffee@ferro.com", "+61 2 8123 5566", "Sydney, Australia"],
   },
   {
     name: "LINDQVIST",
     description:
       "Furniture manufacturer known for handcrafted Scandinavian designs.",
-   Logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
-    contactInfo: [
-      "sales@lindqvist.se",
-      "+46 31 445 778",
-      "Gothenburg, Sweden",
-    ],
+    Logo: "/Images/TrustedBy/FataerG.png",
+    contactInfo: ["sales@lindqvist.se", "+46 31 445 778", "Gothenburg, Sweden"],
   },
   {
     name: "Aria Estates",
     description:
       "Luxury real estate company offering premium residential and commercial properties.",
-    Logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
-    contactInfo: [
-      "contact@ariaestates.com",
-      "+971 4 555 6677",
-      "Dubai, UAE",
-    ],
+    Logo: "/Images/TrustedBy/Hamwi.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "/Images/TrustedBy/HomePlast.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "/Images/TrustedBy/Moler.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "/Images/TrustedBy/Omaya.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "/Images/TrustedBy/SmartCustomer.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
+  },
+  {
+    name: "Aria Estates",
+    description:
+      "Luxury real estate company offering premium residential and commercial properties.",
+    Logo: "/Images/TrustedBy/StandUpAcadey.png",
+    contactInfo: ["contact@ariaestates.com", "+971 4 555 6677", "Dubai, UAE"],
   },
 ];
 
@@ -179,7 +177,7 @@ export interface Service {
 }
 
 export const services: Service[] = [
-   {
+  {
     index: "01",
     slug: "influencer-marketing",
     title: "Influencer Marketing",
@@ -394,7 +392,10 @@ export const services: Service[] = [
 
 /* ============ PROJECTS ============ */
 
-export type ProjectCategory = "Visual Identity" | "Reels & Video" | "Photography";
+export type ProjectCategory =
+  | "Visual Identity"
+  | "Reels & Video"
+  | "Photography";
 
 export const projectCategories: ProjectCategory[] = [
   "Visual Identity",
@@ -441,7 +442,12 @@ export const projects: Project[] = [
       { value: "68%", label: "Brand recall uplift" },
       { value: "2", label: "International design awards" },
     ],
-    services: ["Brand strategy", "Visual identity", "Guidelines", "Launch campaign"],
+    services: [
+      "Brand strategy",
+      "Visual identity",
+      "Guidelines",
+      "Launch campaign",
+    ],
     featured: true,
   },
   {
@@ -465,7 +471,12 @@ export const projects: Project[] = [
       { value: "94M", label: "Organic views" },
       { value: "11×", label: "Cheaper than paid acquisition" },
     ],
-    services: ["Content strategy", "Reels production", "Sound design", "Distribution"],
+    services: [
+      "Content strategy",
+      "Reels production",
+      "Sound design",
+      "Distribution",
+    ],
     featured: true,
   },
   {
@@ -489,7 +500,12 @@ export const projects: Project[] = [
       { value: "+41%", label: "Average order value" },
       { value: "200", label: "Images delivered" },
     ],
-    services: ["Art direction", "Set design", "Product photography", "Retouch & grade"],
+    services: [
+      "Art direction",
+      "Set design",
+      "Product photography",
+      "Retouch & grade",
+    ],
     featured: true,
   },
   {
@@ -561,7 +577,12 @@ export const projects: Project[] = [
       { value: "2", label: "Photography annual features" },
       { value: "40", label: "Campaign images" },
     ],
-    services: ["Campaign concept", "Location scouting", "Photography", "Grading"],
+    services: [
+      "Campaign concept",
+      "Location scouting",
+      "Photography",
+      "Grading",
+    ],
     featured: false,
   },
 ];
@@ -654,31 +675,31 @@ export const team: TeamMember[] = [
     name: "Theo Lindqvist",
     role: "Head of Strategy",
     bio: "Turns balance sheets into narratives. The one asking 'why' until it hurts.",
-     image: "/images/team/mara-castellane.jpg",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Ada Okonkwo",
     role: "Design Director",
     bio: "Typography obsessive. Can spot a fake grid from across the room.",
-     image: "/images/team/mara-castellane.jpg",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Rafael Duarte",
     role: "Director of Photography",
     bio: "Paints with practicals. Refuses to light anything the easy way.",
-     image: "/images/team/mara-castellane.jpg",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Yuki Sørensen",
     role: "Head of Motion",
     bio: "Cut her first reel at fourteen. Thinks in 24 frames per second.",
-     image: "/images/team/mara-castellane.jpg",
+    image: "/images/team/mara-castellane.jpg",
   },
   {
     name: "Leon Abramov",
     role: "Performance Lead",
     bio: "The data romantic. Proves beautiful work converts better — weekly.",
-     image: "/images/team/mara-castellane.jpg",
+    image: "/images/team/mara-castellane.jpg",
   },
 ];
 
@@ -743,8 +764,7 @@ export const openings: Opening[] = [
     team: "Growth",
     type: "Full-time",
     location: "Remote EU",
-    blurb:
-      "Paid social native who reads creative as fluently as dashboards.",
+    blurb: "Paid social native who reads creative as fluently as dashboards.",
   },
 ];
 
@@ -779,7 +799,8 @@ export const timeSlots = [
 
 export const siteConfig = {
   name: "CORECAST",
-  title: "CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact.",
+  title:
+    "CORECAST — From the core of every story, we shape identity, define vision, and create lasting impact.",
   description:
     "CORECAST is a cinematic marketing agency transforming ambitious businesses into unforgettable brands through branding, content creation, photography, reels production and performance marketing.",
   url: "https://corecast.agency",
@@ -789,7 +810,10 @@ export const siteConfig = {
   address: "Khalid Ibn Al-Walid Street, Damascus, Syria",
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/c0recast" },
-    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61587098307701" },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61587098307701",
+    },
     { label: "Vimeo", href: "https://vimeo.com" },
     { label: "LinkedIn", href: "https://linkedin.com" },
   ],
